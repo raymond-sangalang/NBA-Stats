@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <!-- REQUIRED META INFORMATION -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <!-- PAGE TITLE -->
+  <title>Top names of the 1980s</title>
+  <!-- PAGE META INFORMATION -->
+  <meta name="DCTERMS:coderOffice" content="OCACT" />
+  <meta name="DCTERMS:coder" content="jlkun" />
+  <meta name="DCTERMS:contentOffice" content="OCACT" />
+  <meta name="DCTERMS:contentOwner" content="SKunkel" />
+  <meta name="description" content="Top names of the 1980s" />
+  <meta name="DCTERMS:dateCertified" content="2019-04-09" />
+  <meta name="DCTERMS:required" content="OMB:M-17-06:1" />
+  <!-- STYLES -->
+  <link rel="stylesheet" href="/framework/css/ssa.firefly.css" />
+
+  <!-- SCRIPTS -->
+  <script src="/framework/js/ssa.firefly.head.js"></script>
+  
+    <!-- local styles -->
+<style type="text/css">
+td,th {text-align:center}
+</style> 
+
+</head>
+
+<body>
+  <!-- BANNER -->
+  <aside class="accessibility" id="accessibility"><a href="#content" id="skip-navigation">Skip to content</a></aside> <header class="bg-logo white" id="banner" role="banner"> <div class="fx fx-jc-sb px2 py0 wrapper"> <h1 class="fs2 fw4 ma0 l-fs3"><a class="fx fx-ai-c hover-yellow py3 white m-py2" href="/"><img alt="" class="svg3 m-svg5" src="/framework/images/logo.svg"> <span class="pl1 m-pl2">Social Security</span></a></h1> <nav class="fs1 fx print-dn"><a class="fx fx-ai-c hover-yellow px2 white" href="https://search.ssa.gov/search?affiliate=ssa" id="ssa-search" title="SEARCH"><svg class="svg1" focusable="false" viewBox="0 0 24 24"><path d="M14.182.0q-1.994.0-3.814.78t-3.132 2.092-2.092 3.132-.78 3.814q0 1.713.558 3.281t1.59 2.847l-6.196 6.187q-.315.315-.315.776.0.469.311.78t.78.311q.46.0.776-.315l6.187-6.196q1.278 1.031 2.847 1.59t3.281.558q1.994.0 3.814-.78t3.132-2.092 2.092-3.132.78-3.814-.78-3.814-2.092-3.132-3.132-2.092-3.814-.78zm0 2.182q1.551.0 2.966.605t2.438 1.628 1.628 2.438.605 2.966-.605 2.966-1.628 2.438-2.438 1.628-2.966.605-2.966-.605-2.438-1.628-1.628-2.438-.605-2.966.605-2.966 1.628-2.438 2.438-1.628 2.966-.605z" vector-effect="non-scaling-stroke"></path></svg><span class="dn m-dib m-pl1">SEARCH</span></a> <a class="fx fx-ai-c hover-yellow px2 white" href="/site/menu/en/" id="ssa-menu" title="MENU"><svg class="svg1" focusable="false" viewBox="0 0 24 24"><path d="M3 5h18q.414.0.707.293T22 6t-.293.707T21 7H3q-.414.0-.707-.293T2 6t.293-.707T3 5zm0 12h18q.414.0.707.293T22 18t-.293.707T21 19H3q-.414.0-.707-.293T2 18t.293-.707T3 17zm0-6h18q.414.0.707.293T22 12t-.293.707T21 13H3q-.414.0-.707-.293T2 12t.293-.707T3 11z" vector-effect="non-scaling-stroke"></path></svg><span class="dn m-dib m-pl1">MENU</span></a> <a class="fx fx-ai-c hover-yellow px2 white" href="/site/languages/en/" id="ssa-languages" title="LANGUAGES"><svg class="svg1" focusable="false" viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 1C3.14 1 0 4.14.0 8s3.14 7 7 7c.48.0.94-.05 1.38-.14-.17-.08-.2-.73-.02-1.09.19-.41.81-1.45.2-1.8-.61-.35-.44-.5-.81-.91-.37-.41-.22-.47-.25-.58-.08-.34.36-.89.39-.94.02-.06.02-.27.0-.33.0-.08-.27-.22-.34-.23-.06.0-.11.11-.2.13-.09.02-.5-.25-.59-.33-.09-.08-.14-.23-.27-.34-.13-.13-.14-.03-.33-.11s-.8-.31-1.28-.48c-.48-.19-.52-.47-.52-.66-.02-.2-.3-.47-.42-.67-.14-.2-.16-.47-.2-.41-.04.06.25.78.2.81-.05.02-.16-.2-.3-.38-.14-.19.14-.09-.3-.95s.14-1.3.17-1.75c.03-.45.38.17.19-.13-.19-.3.0-.89-.14-1.11-.13-.22-.88.25-.88.25.02-.22.69-.58 1.16-.92.47-.34.78-.06 1.16.05.39.13.41.09.28-.05-.13-.13.06-.17.36-.13.28.05.38.41.83.36.47-.03.05.09.11.22s-.06.11-.38.3c-.3.2.02.22.55.61s.38-.25.31-.55c-.07-.3.39-.06.39-.06.33.22.27.02.5.08.23.06.91.64.91.64-.83.44-.31.48-.17.59.14.11-.28.3-.28.3-.17-.17-.19.02-.3.08-.11.06-.02.22-.02.22-.56.09-.44.69-.42.83.0.14-.38.36-.47.58-.09.2.25.64.06.66-.19.03-.34-.66-1.31-.41-.3.08-.94.41-.59 1.08.36.69.92-.19 1.11-.09.19.1-.06.53-.02.55.04.02.53.02.56.61.03.59.77.53.92.55.17.0.7-.44.77-.45.06-.03.38-.28 1.03.09.66.36.98.31 1.2.47.22.16.08.47.28.58.2.11 1.06-.03 1.28.31.22.34-.88 2.09-1.22 2.28-.34.19-.48.64-.84.92s-.81.64-1.27.91c-.41.23-.47.66-.66.8 3.14-.7 5.48-3.5 5.48-6.84.0-3.86-3.14-7-7-7L7 1zm1.64 6.56c-.09.03-.28.22-.78-.08-.48-.3-.81-.23-.86-.28.0.0-.05-.11.17-.14.44-.05.98.41 1.11.41.13.0.19-.13.41-.05.22.08.05.13-.05.14zM6.34 1.7c-.05-.03.03-.08.09-.14.03-.03.02-.11.05-.14.11-.11.61-.25.52.03-.11.27-.58.3-.66.25zm1.23.89c-.19-.02-.58-.05-.52-.14.3-.28-.09-.38-.34-.38-.25-.02-.34-.16-.22-.19.12-.03.61.02.7.08.08.06.52.25.55.38.02.13.0.25-.17.25zm1.47-.05c-.14.09-.83-.41-.95-.52-.56-.48-.89-.31-1-.41-.11-.1-.08-.19.11-.34.19-.15.69.06 1 .09.3.03.66.27.66.55.02.25.33.5.19.63h-.01z" vector-effect="non-scaling-stroke"></path></svg><span class="dn m-dib m-pl1">LANGUAGES</span></a> <a class="fx fx-ai-c hover-yellow px2 white" href="/site/signin/en/" id="ssa-signin" title="SIGN IN/UP"><svg class="svg1" focusable="false" viewBox="0 0 24 24"><path d="M12 17.016q-.797.0-1.406-.61t-.61-1.405.61-1.405 1.406-.61 1.406.61.61 1.406-.61 1.407-1.406.61zm6 3V9.986H6v10.03h12zm-6-17.11q-1.266.0-2.18.914T8.906 6H9v2.016h6.094V6q0-1.266-.914-2.18T12 2.906zm6 5.11q.797.0 1.406.586t.61 1.383v10.03q0 .798-.61 1.384T18 21.984H6q-.797.0-1.406-.586t-.61-1.384V9.986q0-.798.61-1.384T6 8.016h.984V6q0-2.063 1.477-3.54T12 .985t3.54 1.477T17.015 6v2.016H18z" vector-effect="non-scaling-stroke"></path></svg><span class="dn m-dib m-pl1">SIGN IN/UP</span></a></nav> </div> </header>
+  <!-- MAIN CONTENT -->
+  <main class="content" id="content" role="main">
+    <!-- TITLE BAR -->
+    <section class="bg-ivory-200">
+      <!-- WRAPPER -->
+      <div class="py2 wrapper">
+        <h2 class="fw4 ma0">Top names of the 1980s</h2>
+      </div>
+    </section>
+    <!-- WRAPPER -->
+    <section class="wrapper py0">
+      <!-- GRID -->
+      <div class="grid">
+
+<!-- #BeginEditable name="import" -->
+        <!-- CELL -->
+        <div class="cell cell-last print-dn w-100 m-cell-first m-w-25 bg-black-10">
+          <!-- MENU (SIDEBAR) -->
+          <nav class="pt1" role="navigation">
+            <ul class="list-nb pa0">
+              <li><a class="db pa1" href="../index.html">Popular Baby names</a></li>
+              <li><p><form name="tops"><label for="decade">Select another decade?</label>
+<br /><select name="decade" id="decade">
+<option title="select decade" value="index.html">Decade</option>
+<option title="2010s" value="names2010s.html">2010s</option>
+ <option title="2000s" value="names2000s.html">2000s</option>
+ <option title="1990s" value="names1990s.html">1990s</option>
+ <option title="1980s" value="names1980s.html">1980s</option>
+ <option title="1970s" value="names1970s.html">1970s</option>
+ <option title="1960s" value="names1960s.html">1960s</option>
+ <option title="1950s" value="names1950s.html">1950s</option>
+ <option title="1940s" value="names1940s.html">1940s</option>
+ <option title="1930s" value="names1930s.html">1930s</option>
+ <option title="1920s" value="names1920s.html">1920s</option>
+ <option title="1910s" value="names1910s.html">1910s</option>
+ <option title="1900s" value="names1900s.html">1900s</option>
+ <option title="1890s" value="names1890s.html">1890s</option>
+ <option title="1880s" value="names1880s.html">1880s</option>
+</select>
+<input name="button" type="button" 
+onClick="window.location=document.tops.decade.options[document.tops.decade.selectedIndex].value"value="Go"></form></p>
+<p><a href="century.html">Top names in last 100 years</a></p>
+</li>
+              <li><a class="db pa1" href="../top5names.html">Top 5 names in each year</a></li>
+              <li><a class="db pa1" href="../state/index.html">Popular Names by State</a></li>			  
+            </ul>
+        </div>
+	    <!-- CELL -->
+       <div class="cell cell-last  print-w-100 w-100 m-cell-first m-w-75">		
+
+   <div class="m-pa2"> The following table shows the 200 most popular given names for male and female 
+   babies born during the 1980s.  For each rank and sex, the table shows  
+   the name and the number of occurrences of that name. The 200 most popular names
+   were taken from a universe that includes 19,237,195 male births and
+   18,455,213 female births </div>
+
+   <table class="t-stripe">
+   <thead>
+   <div class="fw6 m-pt2 fs3 ta-c">Popular names of the period 1980s</div>
+   <tr>
+    <td style="background-color:white"></td><th colspan="2" style="text-align:center; background-color:#99ccff">Males</th>
+             <th colspan="2" style="text-align:center; background-color:pink">Females</th>  
+   </tr>
+   <tr >
+     <th style="text-align:right; background-color:white; color:black" scope="col">Rank</th>
+     <th style="text-align:right; background-color:white; color:black" scope="col" abbr="male name">Name</th>
+     <th style="text-align:right; background-color:white; color:black" scope="col" abbr="male number">Number</th>
+     <th style="text-align:right; background-color:white; color:black"  scope="col" abbr="female name">Name</th>
+     <th style="text-align:right; background-color:white; color:black"  abbr="female number">Number</th>
+   </tr>
+   </thead>
+   <tbody>
+<tr ><td>1</td>
+  <td >Michael</td> <td>663,742</td> <td >Jessica</td> <td>469,487</td></tr>
+<tr ><td>2</td>
+  <td >Christopher</td> <td>554,904</td> <td >Jennifer</td> <td>440,871</td></tr>
+<tr ><td>3</td>
+  <td >Matthew</td> <td>458,976</td> <td >Amanda</td> <td>369,721</td></tr>
+<tr ><td>4</td>
+  <td >Joshua</td> <td>396,590</td> <td >Ashley</td> <td>352,187</td></tr>
+<tr ><td>5</td>
+  <td >David</td> <td>383,723</td> <td >Sarah</td> <td>272,613</td></tr>
+<tr ><td>6</td>
+  <td >James</td> <td>356,481</td> <td >Stephanie</td> <td>218,148</td></tr>
+<tr ><td>7</td>
+  <td >Daniel</td> <td>345,506</td> <td >Melissa</td> <td>217,906</td></tr>
+<tr ><td>8</td>
+  <td >Robert</td> <td>321,680</td> <td >Nicole</td> <td>210,482</td></tr>
+<tr ><td>9</td>
+  <td >John</td> <td>321,138</td> <td >Elizabeth</td> <td>198,974</td></tr>
+<tr ><td>10</td>
+  <td >Joseph</td> <td>299,438</td> <td >Heather</td> <td>191,860</td></tr>
+<tr ><td>11</td>
+  <td >Jason</td> <td>292,093</td> <td >Tiffany</td> <td>158,620</td></tr>
+<tr ><td>12</td>
+  <td >Justin</td> <td>289,790</td> <td >Michelle</td> <td>154,013</td></tr>
+<tr ><td>13</td>
+  <td >Andrew</td> <td>285,091</td> <td >Amber</td> <td>153,946</td></tr>
+<tr ><td>14</td>
+  <td >Ryan</td> <td>278,952</td> <td >Megan</td> <td>153,507</td></tr>
+<tr ><td>15</td>
+  <td >William</td> <td>248,301</td> <td >Amy</td> <td>150,669</td></tr>
+<tr ><td>16</td>
+  <td >Brian</td> <td>234,014</td> <td >Rachel</td> <td>146,668</td></tr>
+<tr ><td>17</td>
+  <td >Brandon</td> <td>232,210</td> <td >Kimberly</td> <td>146,447</td></tr>
+<tr ><td>18</td>
+  <td >Jonathan</td> <td>229,952</td> <td >Christina</td> <td>145,995</td></tr>
+<tr ><td>19</td>
+  <td >Nicholas</td> <td>223,331</td> <td >Lauren</td> <td>145,151</td></tr>
+<tr ><td>20</td>
+  <td >Anthony</td> <td>211,830</td> <td >Crystal</td> <td>141,006</td></tr>
+<tr ><td>21</td>
+  <td >Eric</td> <td>204,244</td> <td >Brittany</td> <td>140,847</td></tr>
+<tr ><td>22</td>
+  <td >Adam</td> <td>195,092</td> <td >Rebecca</td> <td>136,229</td></tr>
+<tr ><td>23</td>
+  <td >Kevin</td> <td>188,694</td> <td >Laura</td> <td>134,594</td></tr>
+<tr ><td>24</td>
+  <td >Thomas</td> <td>177,796</td> <td >Danielle</td> <td>134,372</td></tr>
+<tr ><td>25</td>
+  <td >Steven</td> <td>177,449</td> <td >Emily</td> <td>131,755</td></tr>
+<tr ><td>26</td>
+  <td >Timothy</td> <td>172,841</td> <td >Samantha</td> <td>121,134</td></tr>
+<tr ><td>27</td>
+  <td >Richard</td> <td>154,755</td> <td >Angela</td> <td>116,592</td></tr>
+<tr ><td>28</td>
+  <td >Jeremy</td> <td>153,425</td> <td >Erin</td> <td>115,815</td></tr>
+<tr ><td>29</td>
+  <td >Jeffrey</td> <td>144,803</td> <td >Kelly</td> <td>109,553</td></tr>
+<tr ><td>30</td>
+  <td >Kyle</td> <td>141,945</td> <td >Sara</td> <td>104,663</td></tr>
+<tr ><td>31</td>
+  <td >Benjamin</td> <td>141,380</td> <td >Lisa</td> <td>102,600</td></tr>
+<tr ><td>32</td>
+  <td >Aaron</td> <td>138,367</td> <td >Katherine</td> <td>99,172</td></tr>
+<tr ><td>33</td>
+  <td >Charles</td> <td>131,889</td> <td >Andrea</td> <td>98,252</td></tr>
+<tr ><td>34</td>
+  <td >Mark</td> <td>129,433</td> <td >Jamie</td> <td>96,551</td></tr>
+<tr ><td>35</td>
+  <td >Jacob</td> <td>124,239</td> <td >Mary</td> <td>95,860</td></tr>
+<tr ><td>36</td>
+  <td >Stephen</td> <td>113,620</td> <td >Erica</td> <td>93,151</td></tr>
+<tr ><td>37</td>
+  <td >Patrick</td> <td>111,418</td> <td >Courtney</td> <td>84,306</td></tr>
+<tr ><td>38</td>
+  <td >Scott</td> <td>108,183</td> <td >Kristen</td> <td>83,227</td></tr>
+<tr ><td>39</td>
+  <td >Nathan</td> <td>105,990</td> <td >Shannon</td> <td>78,416</td></tr>
+<tr ><td>40</td>
+  <td >Paul</td> <td>104,388</td> <td >April</td> <td>75,947</td></tr>
+<tr ><td>41</td>
+  <td >Sean</td> <td>103,866</td> <td >Katie</td> <td>72,863</td></tr>
+<tr ><td>42</td>
+  <td >Travis</td> <td>102,926</td> <td >Lindsey</td> <td>71,937</td></tr>
+<tr ><td>43</td>
+  <td >Zachary</td> <td>101,852</td> <td >Kristin</td> <td>70,558</td></tr>
+<tr ><td>44</td>
+  <td >Dustin</td> <td>97,320</td> <td >Lindsay</td> <td>68,492</td></tr>
+<tr ><td>45</td>
+  <td >Gregory</td> <td>93,673</td> <td >Christine</td> <td>68,013</td></tr>
+<tr ><td>46</td>
+  <td >Kenneth</td> <td>89,136</td> <td >Alicia</td> <td>66,962</td></tr>
+<tr ><td>47</td>
+  <td >Jose</td> <td>86,612</td> <td >Vanessa</td> <td>65,722</td></tr>
+<tr ><td>48</td>
+  <td >Tyler</td> <td>86,453</td> <td >Maria</td> <td>65,706</td></tr>
+<tr ><td>49</td>
+  <td >Jesse</td> <td>85,919</td> <td >Kathryn</td> <td>62,443</td></tr>
+<tr ><td>50</td>
+  <td >Alexander</td> <td>81,995</td> <td >Allison</td> <td>62,333</td></tr>
+<tr ><td>51</td>
+  <td >Bryan</td> <td>80,505</td> <td >Julie</td> <td>61,685</td></tr>
+<tr ><td>52</td>
+  <td >Samuel</td> <td>73,448</td> <td >Anna</td> <td>57,309</td></tr>
+<tr ><td>53</td>
+  <td >Derek</td> <td>72,911</td> <td >Tara</td> <td>56,332</td></tr>
+<tr ><td>54</td>
+  <td >Bradley</td> <td>69,360</td> <td >Kayla</td> <td>55,286</td></tr>
+<tr ><td>55</td>
+  <td >Chad</td> <td>69,061</td> <td >Natalie</td> <td>54,431</td></tr>
+<tr ><td>56</td>
+  <td >Shawn</td> <td>65,594</td> <td >Victoria</td> <td>53,264</td></tr>
+<tr ><td>57</td>
+  <td >Edward</td> <td>60,823</td> <td >Monica</td> <td>51,861</td></tr>
+<tr ><td>58</td>
+  <td >Jared</td> <td>60,295</td> <td >Jacqueline</td> <td>51,553</td></tr>
+<tr ><td>59</td>
+  <td >Cody</td> <td>60,267</td> <td >Holly</td> <td>49,656</td></tr>
+<tr ><td>60</td>
+  <td >Jordan</td> <td>57,162</td> <td >Kristina</td> <td>45,947</td></tr>
+<tr ><td>61</td>
+  <td >Peter</td> <td>56,711</td> <td >Patricia</td> <td>45,121</td></tr>
+<tr ><td>62</td>
+  <td >Corey</td> <td>53,612</td> <td >Cassandra</td> <td>44,906</td></tr>
+<tr ><td>63</td>
+  <td >Keith</td> <td>52,644</td> <td >Brandy</td> <td>44,526</td></tr>
+<tr ><td>64</td>
+  <td >Marcus</td> <td>51,789</td> <td >Whitney</td> <td>44,371</td></tr>
+<tr ><td>65</td>
+  <td >Juan</td> <td>51,425</td> <td >Chelsea</td> <td>43,161</td></tr>
+<tr ><td>66</td>
+  <td >Donald</td> <td>50,848</td> <td >Brandi</td> <td>42,887</td></tr>
+<tr ><td>67</td>
+  <td >Ronald</td> <td>46,672</td> <td >Catherine</td> <td>42,420</td></tr>
+<tr ><td>68</td>
+  <td >George</td> <td>45,706</td> <td >Cynthia</td> <td>41,668</td></tr>
+<tr ><td>69</td>
+  <td >Phillip</td> <td>45,702</td> <td >Kathleen</td> <td>39,399</td></tr>
+<tr ><td>70</td>
+  <td >Cory</td> <td>44,358</td> <td >Veronica</td> <td>39,231</td></tr>
+<tr ><td>71</td>
+  <td >Joel</td> <td>43,561</td> <td >Leslie</td> <td>38,727</td></tr>
+<tr ><td>72</td>
+  <td >Shane</td> <td>43,178</td> <td >Natasha</td> <td>38,208</td></tr>
+<tr ><td>73</td>
+  <td >Douglas</td> <td>41,753</td> <td >Krystal</td> <td>37,494</td></tr>
+<tr ><td>74</td>
+  <td >Antonio</td> <td>41,612</td> <td >Stacy</td> <td>36,992</td></tr>
+<tr ><td>75</td>
+  <td >Raymond</td> <td>41,513</td> <td >Diana</td> <td>36,890</td></tr>
+<tr ><td>76</td>
+  <td >Carlos</td> <td>41,489</td> <td >Erika</td> <td>36,847</td></tr>
+<tr ><td>77</td>
+  <td >Brett</td> <td>41,287</td> <td >Dana</td> <td>36,821</td></tr>
+<tr ><td>78</td>
+  <td >Gary</td> <td>40,236</td> <td >Jenna</td> <td>36,594</td></tr>
+<tr ><td>79</td>
+  <td >Alex</td> <td>38,702</td> <td >Meghan</td> <td>36,206</td></tr>
+<tr ><td>80</td>
+  <td >Nathaniel</td> <td>38,653</td> <td >Carrie</td> <td>36,081</td></tr>
+<tr ><td>81</td>
+  <td >Craig</td> <td>38,103</td> <td >Leah</td> <td>36,048</td></tr>
+<tr ><td>82</td>
+  <td >Ian</td> <td>37,785</td> <td >Melanie</td> <td>35,945</td></tr>
+<tr ><td>83</td>
+  <td >Luis</td> <td>37,429</td> <td >Brooke</td> <td>34,979</td></tr>
+<tr ><td>84</td>
+  <td >Derrick</td> <td>36,346</td> <td >Karen</td> <td>34,915</td></tr>
+<tr ><td>85</td>
+  <td >Erik</td> <td>36,340</td> <td >Alexandra</td> <td>34,799</td></tr>
+<tr ><td>86</td>
+  <td >Casey</td> <td>35,973</td> <td >Valerie</td> <td>34,621</td></tr>
+<tr ><td>87</td>
+  <td >Philip</td> <td>35,722</td> <td >Caitlin</td> <td>33,598</td></tr>
+<tr ><td>88</td>
+  <td >Frank</td> <td>33,590</td> <td >Julia</td> <td>33,349</td></tr>
+<tr ><td>89</td>
+  <td >Evan</td> <td>32,474</td> <td >Alyssa</td> <td>32,951</td></tr>
+<tr ><td>90</td>
+  <td >Gabriel</td> <td>32,324</td> <td >Jasmine</td> <td>32,949</td></tr>
+<tr ><td>91</td>
+  <td >Victor</td> <td>32,274</td> <td >Hannah</td> <td>32,702</td></tr>
+<tr ><td>92</td>
+  <td >Vincent</td> <td>32,044</td> <td >Stacey</td> <td>32,135</td></tr>
+<tr ><td>93</td>
+  <td >Austin</td> <td>31,289</td> <td >Brittney</td> <td>31,533</td></tr>
+<tr ><td>94</td>
+  <td >Larry</td> <td>31,284</td> <td >Susan</td> <td>30,546</td></tr>
+<tr ><td>95</td>
+  <td >Brent</td> <td>31,281</td> <td >Margaret</td> <td>30,354</td></tr>
+<tr ><td>96</td>
+  <td >Seth</td> <td>31,134</td> <td >Sandra</td> <td>30,031</td></tr>
+<tr ><td>97</td>
+  <td >Wesley</td> <td>31,089</td> <td >Candice</td> <td>29,848</td></tr>
+<tr ><td>98</td>
+  <td >Dennis</td> <td>30,468</td> <td >Latoya</td> <td>29,536</td></tr>
+<tr ><td>99</td>
+  <td >Todd</td> <td>30,338</td> <td >Bethany</td> <td>29,341</td></tr>
+<tr ><td>100</td>
+  <td >Christian</td> <td>30,258</td> <td >Misty</td> <td>29,116</td></tr>
+<tr ><td>101</td>
+  <td >Curtis</td> <td>29,899</td> <td >Katrina</td> <td>28,827</td></tr>
+<tr ><td>102</td>
+  <td >Jeffery</td> <td>29,576</td> <td >Tracy</td> <td>28,492</td></tr>
+<tr ><td>103</td>
+  <td >Randy</td> <td>29,515</td> <td >Casey</td> <td>27,915</td></tr>
+<tr ><td>104</td>
+  <td >Jeremiah</td> <td>28,333</td> <td >Kelsey</td> <td>27,755</td></tr>
+<tr ><td>105</td>
+  <td >Adrian</td> <td>28,134</td> <td >Kara</td> <td>27,504</td></tr>
+<tr ><td>106</td>
+  <td >Jesus</td> <td>27,382</td> <td >Nichole</td> <td>27,233</td></tr>
+<tr ><td>107</td>
+  <td >Luke</td> <td>27,044</td> <td >Alison</td> <td>27,019</td></tr>
+<tr ><td>108</td>
+  <td >Alan</td> <td>26,819</td> <td >Heidi</td> <td>26,381</td></tr>
+<tr ><td>109</td>
+  <td >Trevor</td> <td>26,695</td> <td >Alexis</td> <td>26,320</td></tr>
+<tr ><td>110</td>
+  <td >Russell</td> <td>26,652</td> <td >Molly</td> <td>25,885</td></tr>
+<tr ><td>111</td>
+  <td >Mario</td> <td>26,396</td> <td >Tina</td> <td>25,841</td></tr>
+<tr ><td>112</td>
+  <td >Lucas</td> <td>26,087</td> <td >Pamela</td> <td>25,748</td></tr>
+<tr ><td>113</td>
+  <td >Jerry</td> <td>25,756</td> <td >Rachael</td> <td>25,668</td></tr>
+<tr ><td>114</td>
+  <td >Miguel</td> <td>25,550</td> <td >Nancy</td> <td>25,484</td></tr>
+<tr ><td>115</td>
+  <td >Carl</td> <td>25,467</td> <td >Jillian</td> <td>25,445</td></tr>
+<tr ><td>116</td>
+  <td >Blake</td> <td>25,399</td> <td >Candace</td> <td>25,167</td></tr>
+<tr ><td>117</td>
+  <td >Cameron</td> <td>24,597</td> <td >Denise</td> <td>25,114</td></tr>
+<tr ><td>118</td>
+  <td >Troy</td> <td>24,544</td> <td >Sabrina</td> <td>24,634</td></tr>
+<tr ><td>119</td>
+  <td >Mitchell</td> <td>24,538</td> <td >Gina</td> <td>24,454</td></tr>
+<tr ><td>120</td>
+  <td >Tony</td> <td>24,493</td> <td >Renee</td> <td>24,411</td></tr>
+<tr ><td>121</td>
+  <td >Shaun</td> <td>24,468</td> <td >Jill</td> <td>24,409</td></tr>
+<tr ><td>122</td>
+  <td >Terry</td> <td>24,158</td> <td >Kendra</td> <td>24,387</td></tr>
+<tr ><td>123</td>
+  <td >Johnny</td> <td>23,492</td> <td >Morgan</td> <td>24,286</td></tr>
+<tr ><td>124</td>
+  <td >Martin</td> <td>23,223</td> <td >Brenda</td> <td>24,145</td></tr>
+<tr ><td>125</td>
+  <td >Ricardo</td> <td>23,087</td> <td >Monique</td> <td>23,896</td></tr>
+<tr ><td>126</td>
+  <td >Bobby</td> <td>22,024</td> <td >Teresa</td> <td>23,410</td></tr>
+<tr ><td>127</td>
+  <td >Allen</td> <td>21,909</td> <td >Krista</td> <td>22,865</td></tr>
+<tr ><td>128</td>
+  <td >Johnathan</td> <td>21,901</td> <td >Linda</td> <td>22,816</td></tr>
+<tr ><td>129</td>
+  <td >Jorge</td> <td>21,723</td> <td >Miranda</td> <td>22,717</td></tr>
+<tr ><td>130</td>
+  <td >Devin</td> <td>21,705</td> <td >Robin</td> <td>22,697</td></tr>
+<tr ><td>131</td>
+  <td >Andre</td> <td>21,594</td> <td >Dawn</td> <td>22,405</td></tr>
+<tr ><td>132</td>
+  <td >Henry</td> <td>20,726</td> <td >Theresa</td> <td>22,385</td></tr>
+<tr ><td>133</td>
+  <td >Billy</td> <td>20,652</td> <td >Kristy</td> <td>22,384</td></tr>
+<tr ><td>134</td>
+  <td >Caleb</td> <td>20,644</td> <td >Tanya</td> <td>22,303</td></tr>
+<tr ><td>135</td>
+  <td >Marc</td> <td>20,520</td> <td >Wendy</td> <td>22,272</td></tr>
+<tr ><td>136</td>
+  <td >Garrett</td> <td>20,477</td> <td >Melinda</td> <td>22,214</td></tr>
+<tr ><td>137</td>
+  <td >Ricky</td> <td>20,161</td> <td >Joanna</td> <td>22,204</td></tr>
+<tr ><td>138</td>
+  <td >Francisco</td> <td>20,076</td> <td >Anne</td> <td>22,115</td></tr>
+<tr ><td>139</td>
+  <td >Kristopher</td> <td>20,069</td> <td >Felicia</td> <td>21,945</td></tr>
+<tr ><td>140</td>
+  <td >Danny</td> <td>20,011</td> <td >Desiree</td> <td>21,812</td></tr>
+<tr ><td>141</td>
+  <td >Manuel</td> <td>19,978</td> <td >Jaclyn</td> <td>21,800</td></tr>
+<tr ><td>142</td>
+  <td >Lee</td> <td>19,785</td> <td >Alisha</td> <td>21,749</td></tr>
+<tr ><td>143</td>
+  <td >Lawrence</td> <td>19,639</td> <td >Lori</td> <td>21,643</td></tr>
+<tr ><td>144</td>
+  <td >Jonathon</td> <td>19,581</td> <td >Tamara</td> <td>21,227</td></tr>
+<tr ><td>145</td>
+  <td >Jimmy</td> <td>19,525</td> <td >Marissa</td> <td>21,108</td></tr>
+<tr ><td>146</td>
+  <td >Lance</td> <td>19,452</td> <td >Kelli</td> <td>21,049</td></tr>
+<tr ><td>147</td>
+  <td >Taylor</td> <td>19,414</td> <td >Lacey</td> <td>20,772</td></tr>
+<tr ><td>148</td>
+  <td >Randall</td> <td>19,328</td> <td >Abigail</td> <td>20,646</td></tr>
+<tr ><td>149</td>
+  <td >Micheal</td> <td>18,735</td> <td >Christy</td> <td>20,227</td></tr>
+<tr ><td>150</td>
+  <td >Mathew</td> <td>18,622</td> <td >Jenny</td> <td>19,713</td></tr>
+<tr ><td>151</td>
+  <td >Albert</td> <td>18,505</td> <td >Tabitha</td> <td>19,577</td></tr>
+<tr ><td>152</td>
+  <td >Jamie</td> <td>18,411</td> <td >Colleen</td> <td>19,465</td></tr>
+<tr ><td>153</td>
+  <td >Isaac</td> <td>18,365</td> <td >Meredith</td> <td>19,201</td></tr>
+<tr ><td>154</td>
+  <td >Roger</td> <td>18,001</td> <td >Barbara</td> <td>19,129</td></tr>
+<tr ><td>155</td>
+  <td >Rodney</td> <td>17,872</td> <td >Angelica</td> <td>19,074</td></tr>
+<tr ><td>156</td>
+  <td >Roberto</td> <td>17,814</td> <td >Carolyn</td> <td>18,631</td></tr>
+<tr ><td>157</td>
+  <td >Jon</td> <td>17,705</td> <td >Rebekah</td> <td>18,316</td></tr>
+<tr ><td>158</td>
+  <td >Colin</td> <td>17,671</td> <td >Ebony</td> <td>18,263</td></tr>
+<tr ><td>159</td>
+  <td >Walter</td> <td>17,567</td> <td >Deanna</td> <td>18,152</td></tr>
+<tr ><td>160</td>
+  <td >Clinton</td> <td>17,534</td> <td >Tonya</td> <td>17,988</td></tr>
+<tr ><td>161</td>
+  <td >Louis</td> <td>17,354</td> <td >Caroline</td> <td>17,940</td></tr>
+<tr ><td>162</td>
+  <td >Clayton</td> <td>16,925</td> <td >Kristi</td> <td>17,709</td></tr>
+<tr ><td>163</td>
+  <td >Willie</td> <td>16,893</td> <td >Kari</td> <td>17,543</td></tr>
+<tr ><td>164</td>
+  <td >Arthur</td> <td>16,786</td> <td >Michele</td> <td>17,264</td></tr>
+<tr ><td>165</td>
+  <td >Chase</td> <td>16,556</td> <td >Brianna</td> <td>17,135</td></tr>
+<tr ><td>166</td>
+  <td >Joe</td> <td>16,510</td> <td >Bridget</td> <td>17,103</td></tr>
+<tr ><td>167</td>
+  <td >Jack</td> <td>15,925</td> <td >Angel</td> <td>16,740</td></tr>
+<tr ><td>168</td>
+  <td >Jay</td> <td>15,816</td> <td >Marie</td> <td>16,536</td></tr>
+<tr ><td>169</td>
+  <td >Angel</td> <td>15,794</td> <td >Sharon</td> <td>16,500</td></tr>
+<tr ><td>170</td>
+  <td >Calvin</td> <td>15,785</td> <td >Sheena</td> <td>16,257</td></tr>
+<tr ><td>171</td>
+  <td >Ross</td> <td>15,714</td> <td >Tasha</td> <td>16,257</td></tr>
+<tr ><td>172</td>
+  <td >Darren</td> <td>15,695</td> <td >Meagan</td> <td>16,248</td></tr>
+<tr ><td>173</td>
+  <td >Oscar</td> <td>15,652</td> <td >Jaime</td> <td>16,214</td></tr>
+<tr ><td>174</td>
+  <td >Drew</td> <td>15,591</td> <td >Cindy</td> <td>16,015</td></tr>
+<tr ><td>175</td>
+  <td >Maurice</td> <td>15,575</td> <td >Priscilla</td> <td>16,005</td></tr>
+<tr ><td>176</td>
+  <td >Gerald</td> <td>15,510</td> <td >Ann</td> <td>15,930</td></tr>
+<tr ><td>177</td>
+  <td >Alejandro</td> <td>15,304</td> <td >Ashlee</td> <td>15,849</td></tr>
+<tr ><td>178</td>
+  <td >Spencer</td> <td>15,178</td> <td >Stefanie</td> <td>15,829</td></tr>
+<tr ><td>179</td>
+  <td >Hector</td> <td>15,103</td> <td >Cassie</td> <td>15,760</td></tr>
+<tr ><td>180</td>
+  <td >Ruben</td> <td>14,849</td> <td >Adrienne</td> <td>15,671</td></tr>
+<tr ><td>181</td>
+  <td >Wayne</td> <td>14,746</td> <td >Tammy</td> <td>15,651</td></tr>
+<tr ><td>182</td>
+  <td >Brendan</td> <td>14,593</td> <td >Ana</td> <td>15,507</td></tr>
+<tr ><td>183</td>
+  <td >Grant</td> <td>14,517</td> <td >Beth</td> <td>15,371</td></tr>
+<tr ><td>184</td>
+  <td >Javier</td> <td>14,480</td> <td >Dominique</td> <td>15,098</td></tr>
+<tr ><td>185</td>
+  <td >Bruce</td> <td>14,336</td> <td >Latasha</td> <td>15,035</td></tr>
+<tr ><td>186</td>
+  <td >Roy</td> <td>14,299</td> <td >Cristina</td> <td>15,030</td></tr>
+<tr ><td>187</td>
+  <td >Dylan</td> <td>14,169</td> <td >Mallory</td> <td>14,996</td></tr>
+<tr ><td>188</td>
+  <td >Logan</td> <td>13,996</td> <td >Virginia</td> <td>14,993</td></tr>
+<tr ><td>189</td>
+  <td >Edwin</td> <td>13,904</td> <td >Deborah</td> <td>14,781</td></tr>
+<tr ><td>190</td>
+  <td >Omar</td> <td>13,683</td> <td >Audrey</td> <td>14,668</td></tr>
+<tr ><td>191</td>
+  <td >Brad</td> <td>13,581</td> <td >Katelyn</td> <td>14,643</td></tr>
+<tr ><td>192</td>
+  <td >Reginald</td> <td>13,498</td> <td >Regina</td> <td>14,579</td></tr>
+<tr ><td>193</td>
+  <td >Fernando</td> <td>13,190</td> <td >Carla</td> <td>14,450</td></tr>
+<tr ><td>194</td>
+  <td >Darrell</td> <td>13,166</td> <td >Cheryl</td> <td>14,319</td></tr>
+<tr ><td>195</td>
+  <td >Sergio</td> <td>13,145</td> <td >Olivia</td> <td>14,051</td></tr>
+<tr ><td>196</td>
+  <td >Frederick</td> <td>13,057</td> <td >Autumn</td> <td>13,827</td></tr>
+<tr ><td>197</td>
+  <td >Julian</td> <td>12,927</td> <td >Claudia</td> <td>13,795</td></tr>
+<tr ><td>198</td>
+  <td >Jaime</td> <td>12,849</td> <td >Jordan</td> <td>13,788</td></tr>
+<tr ><td>199</td>
+  <td >Jermaine</td> <td>12,803</td> <td >Nina</td> <td>13,628</td></tr>
+<tr ><td>200</td>
+  <td >Geoffrey</td> <td>12,731</td> <td >Taylor</td> <td>13,617</td></tr>
+   <tr><td></td><td colspan="4">
+   Source: 100% sample based on Social Security card application data as of 
+   of March 2019.  See the <a href="../background.html">limitations</a> of
+   this data source.</td></tr>
+   </tbody>
+   </table>
+   
+   </td>
+   </tr>
+   </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <!-- FOOTER -->
+  <footer class="fs1 print-dn" id="footer" role="contentinfo">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="cell w-100 m-w-25 l-w-15">
+        <h3 class="fs1 mb1">Benefits</h3>
+        <ul class="list-nb pl0">
+          <li><a class="db" href="/benefits/retirement/">Retirement</a></li>
+          <li><a class="db" href="/benefits/disability/">Disability</a></li>
+          <li><a class="db" href="/benefits/medicare/">Medicare</a></li>
+          <li><a class="db" href="/benefits/survivors/">Survivors</a></li>
+          <li><a class="db" href="/benefits/ssi/" title="Supplemental Security Income">SSI</a></li>
+        </ul>
+      </div>
+      <div class="cell w-100 m-w-25 l-w-15">
+        <h3 class="fs1 mb1">Resources</h3>
+        <ul class="list-nb pl0">
+          <li><a class="db" href="/onlineservices/">Online Services</a></li>
+          <li><a class="db" href="https://faq.ssa.gov/" title="Frequently Asked Questions">FAQs</a></li>
+          <li><a class="db" href="/agency/contact/">Contact Us</a></li>
+          <li><a class="db" href="https://www.ssa.gov/forms/">Forms</a></li>
+          <li><a class="db" href="/agency/glossary/">Glossary</a></li>
+          <li><a class="db" href="/pubs/">Publications</a></li>
+        </ul>
+      </div>
+      <div class="cell w-100 m-w-25 l-w-15">
+        <h3 class="fs1 mb1">Agency</h3>
+        <ul class="list-nb pl0">
+          <li><a class="db" href="/agency/">About Us</a></li>
+          <li><a class="db" href="https://www.ssa.gov/accessibility/">Accessibility</a></li>
+          <li><a class="db" href="/foia/" title="Freedom of Information Act">FOIA</a></li>
+          <li><a class="db" href="/open/">Open Government</a></li>
+          <li><a class="db" href="/agency/plain-language/">Plain Language</a></li>
+          <li><a class="db" href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="cell w-100 m-w-25 l-w-15">
+        <h3 class="fs1 mb1">Connect with Us</h3>
+        <ul class="list-nb pl0">
+          <li><a class="db" href="https://blog.ssa.gov/">Blog</a></li>
+          <li><a class="db" href="https://facebook.com/socialsecurity/">Facebook</a></li>
+          <li><a class="db" href="https://instagram.com/socialsecurity/">Instagram</a></li>
+          <li><a class="db" href="https://twitter.com/socialsecurity/">Twitter</a></li>
+          <li><a class="db" href="https://youtube.com/socialsecurityonline/">YouTube</a></li>
+          <li><a class="db" href="/socialmedia/">All Social Media</a></li>
+        </ul>
+      </div>
+      <div class="cell w-100 m-w-25 l-w-15">
+        <h3 class="fs1 mb1">Related Websites</h3>
+        <ul class="list-nb pl0">
+          <li><a class="db" href="https://www.benefits.gov">Benefits.gov</a></li>
+          <li><a class="db" href="https://www.mymoney.gov">MyMoney.gov</a></li>
+          <li><a class="db" href="https://www.regulations.gov">Regulations.gov</a></li>
+          <li><a class="db" href="https://www.usa.gov">USA.gov</a></li>
+        </ul>
+      </div>
+      <div class="cell w-100 m-w-25">
+        <h3 class="fs1 mb1">Report Fraud, Waste or Abuse</h3>
+        <ul class="list-nb pl0">
+          <li><a class="db" href="https://oig.ssa.gov/">Office of the Inspector General</a></li>
+        </ul>
+      </div>
+      <div class="cell w-100 m-w-50 l-ta-c l-w-100">
+        <p><em>This website is produced and published at U.S. taxpayer expense.</em></p>
+      </div>
+    </div>
+  </div>
+</footer>
+  <!-- SCRIPTS -->
+  <script src="/framework/js/ssa.firefly.body.js"></script>
+</body>
+
+</html>
