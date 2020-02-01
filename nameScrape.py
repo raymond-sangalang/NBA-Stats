@@ -1,4 +1,3 @@
-# CIS41A-lab5 name.py
 # Raymond Sangalang
 # back end to application: reads and stores data from the file and allows searches for data
 import re, requests, sqlite3
