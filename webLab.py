@@ -9,7 +9,7 @@ class UI:
                             from player Name and catches exceptions to acquire data validation.                     '''
 
     # WebScrape/Crawl into espn files
-    __STARTFILE, curr_year= ("http://www.espn.com/nba/statistics/rpm/_/year/", "http://www.espn.com/nba/statistics/rpm")
+    __STARTFILE= "http://www.espn.com/nba/statistics/rpm/_/year/"
 
     def __init__(self):
         ''' constructor: keep looping until file is able to be read in, then create Name object'''
@@ -18,7 +18,7 @@ class UI:
             ''' Collecting data in years starting from 2014 to 2020 '''
             
             print(f"\n\n\t\tYEAR: {num_year-1}-{num_year}\n\t\t{'-'*15}\n")
-            filetouse= self.__STARTFILE+str(num_year) if num_year != 2021 else self.curr_year
+            filetouse= self.__STARTFILE+str(num_year) if num_year != 2021 else self.__STARTFILE[:-8]
             searchWeb= filetouse
             
             page_count=1                                        # start of page count
