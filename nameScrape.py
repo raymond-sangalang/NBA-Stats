@@ -101,7 +101,7 @@ class Name:
             
             # StatsOfPlayer: games played, min/game, off rpg, def rpg, total reb/game, wins
             player_stats= (int(self.listOfStats[1]),*[float(i) for i in self.listOfStats[2:]])
-            print(*list(player_stats))
+            ##print(*list(player_stats))
             
             _conn.close() # close connection
                   
