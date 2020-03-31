@@ -8,6 +8,7 @@ class UI:
     ''' UI(user-interface)- implements front-end app: constructor for file, and run method to utilize methods
                             from player Name and catches exceptions to acquire data validation.                     '''
 
+    
     # WebScrape/Crawl into espn files
     __STARTFILE= "http://www.espn.com/nba/statistics/rpm/_/year/"
 
@@ -18,27 +19,33 @@ class UI:
             ''' Collecting data in years starting from 2014 to 2020 '''
             
             print(f"\n\n\t\tYEAR: {num_year-1}-{num_year}\n\t\t{'-'*15}\n")
+                
+            # file pages differ, such that the current year omits a partition of string
             filetouse= self.__STARTFILE+str(num_year) if num_year != 2021 else self.__STARTFILE[:-8]
+           
             searchWeb= filetouse
-            
-            page_count=1                                        # start of page count
+            page_count= 1                                        # start of page count
+                  
             while True: 
                 ''' loops until valid file name is read, and if user just entered, then utilizes default file name'''
-                print(searchWeb)
+     
                 _data= Name(searchWeb)
-                page_count+=1                                   # increment to next page of data
+                page_count += 1                                   # increment to next page of data
                 
-                if len(_data) == 0: break                       # if page has no data, break out of loop
-                else: 
-                    self._dataNames = _data                
+                if len(_data) == 0:                               # if page has no data, break out of loop
+                  break                       
+  
+                self._dataNames = _data                
                 
                 if page_count >= 2 and num_year == 2021:
                     searchWeb= filetouse + f"/_/page/{page_count}"
+                  
                 elif page_count >= 2: 
                     searchWeb= filetouse + f"/page/{page_count}"
                                                              
 
-    def getData(self): return self._dataNames  # getter to Name class
+    def getData(self): # getter to Name class
+         return self._dataNames  
     
 
     
