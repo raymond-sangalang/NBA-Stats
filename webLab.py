@@ -2,7 +2,6 @@
 #         - The program implements UI(user-interface) to communicate with user and retrives data from the Names(back-end database) to
 #           compile data from a file and allow searching of data
 from nameScrape import Name, re, requests
-#import os
 
 
 class UI:
@@ -38,11 +37,6 @@ class UI:
                 elif page_count >= 2: 
                     searchWeb= filetouse + f"/page/{page_count}"
                                                              
-
-                ''' try: except FileNotFoundError: print("ERROR: opening input file")
-                except requests.exceptions.HTTPError as ht: print("HTTP ERROR:", ht)
-                except requests.exceptions.ConnectionError as ct: print("Connection ERROR:", ct) '''
-
 
     def getData(self): return self._dataNames  # getter to Name class
     
