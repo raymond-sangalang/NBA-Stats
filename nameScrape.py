@@ -1,14 +1,28 @@
 # Raymond Sangalang
 # back end to application: reads and stores data from the file and allows searches for data
 import re, requests, sqlite3
+from sqlite3 import Error
 from requests.exceptions import HTTPError
 from bs4 import BeautifulSoup
 
-def createTables():
+
+def connect_SQL():
+    try:
+        return sqlite3.connect('_nbaPlayer.db')
+    except Error as e:
+        print("ERROR:", str(e))
+
+def createTables(_conn):
     '''  Three tables created: 
               1- players years ==> same/new team and rankings; linked years
               2- stats of player ==> games played, min/game, reb/game, wins
               3- players ==> first and last name, years played               '''
+    
+    _cur= _conn.cursor()
+    _cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Player' ''')
+    
+    if _cur.fetchone()[0] != 0:
+        return   
     
     _cur.execute("""CREATE TABLE YearOfPlayer
             (player_year text, team text, rank integer)""")
@@ -46,7 +60,7 @@ def add_Player(name, year, key):
     
     _cur.execute("""INSERT INTO Player (name, year, key)
                     VALUES(?,?,?)""", (name, year, key))
-    _conn.commit() # save changes     
+    _conn.commit() # save changes   
     
 
 str_pattern= re.compile("[^\s\"\d,'/][a-zA-Z\.\-\s]+")      # regex pattern to obtain values of name, position and team.
@@ -61,8 +75,8 @@ class Name:
         self.listOfNames, self.listOfStats = [], []      # listOfNames --> player name, team, and position
                                                          # listOfStats --> rank, game played, min/game, off-reb/game, def-reb/game, reb/game, wins        
         
-        _conn= sqlite3.connect('_nbaPlayer.db') # connect a database through sqlite3 into file _nbaPlayer.db 
-        _cur= _conn.cursor()  
+        _conn= connect_SQL() # connect a database through sqlite3 into file _nbaPlayer.db 
+        createTables(_conn)  # create table if do not exist
         
         _cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Player' ''')
         if _cur.fetchone()[0] == 0:
@@ -80,18 +94,17 @@ class Name:
             self.players[self.listOfNames[0]]= self.listOfNames[1:]+self.listOfStats
 
             print(f"{', '.join([str(i) for i in self.listOfNames]):30s} ==> {', '.join([str(i) for i in self.listOfStats])}\n")
+
+            '''generators'''
+            # YearOfPlayer: name+year--team--ranking
+            playerYear_entities= (f'{self.listOfNames[0]}{curr_year}', self.listOfNames[-1], int(self.listOfStats[0]))
             
-        '''print(f"Name {' '*25} Stats")
-        for k, v in self.players.items():
-            print(f"{k:30s} {', '.join(list(v))}")'''
-        '''
-        if len(self.listOfNames) != 0:
-            print(_fileName)
-            for _init, _stat in zip(self.listOfNames, self.listOfStats):
-                print(f"{', '.join(_init.split()):30s} ==> {', '.join([str(_s) for _s in _stat])}")
-            #print(f"{', '.join([str(i) for i in self.listOfNames]):30s} ==> {', '.join([str(i) for i in self.listOfStats])}\n")'''
- 
+            # StatsOfPlayer: games played, min/game, off rpg, def rpg, total reb/game, wins
+            player_stats= (int(self.listOfStats[1]),*[float(i) for i in self.listOfStats[2:]])
+            print(*list(player_stats))
             
+            _conn.close() # close connection
+                  
             
     def match_tag(self, _tag):
         return True if _tag and (_tag.startswith('oddrow') or _tag.startswith('evenrow')) else False
