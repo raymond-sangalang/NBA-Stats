@@ -35,7 +35,7 @@ class Name:
 
             print(f"{', '.join([str(i) for i in self.listOfNames]):30s} ==> {', '.join([str(i) for i in self.listOfStats])}\n")
             
-            '''generators'''
+            
             # YearOfPlayer: name+year--team--ranking
             playerYear_entities= (f'{self.listOfNames[0]}{curr_year}', self.listOfNames[-1], int(self.listOfStats[0]))
             
