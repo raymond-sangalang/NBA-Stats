@@ -18,8 +18,6 @@ class KeyChain:
     
     def __init__(self, player_name):
         self._dictPlayer= {}
-        _Done= False
-        checkKey= -1
         
         
     
@@ -34,19 +32,24 @@ class KeyChain:
     
     def addUniq(self, player_name, findKey):
         
+        _Done= False
+        checkKey= -1
+        
         if player_name not in _dictPlayer.values():
+            
             trial= 1
             while not Done:
+                
                 checkKey= self.createKey(player_name, i= trial)
                 if checkKey not in _dictPlayer.keys():
                     _Done = True
+                    
                 trial += 1   
         
         if self.count == self._STARTPROBE:
             self._STARTPROBE *= 2
+            
         _dictPlayer[checkKey]= player_name
-               
-        
         return checkKey  
         
         
