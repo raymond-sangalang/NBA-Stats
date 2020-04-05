@@ -12,19 +12,20 @@ _DEFAULTFILE= "playerKey.txt"
 class KeyChain:
     """ start chaining with initial prime number mod and keep count, then
         increment probe """
-    
+    _STARTPROBE= 13 
+    count= 0 
       
     
     def __init__(self):   
         
         self._dictPlayer= {}
         self.checkMap= set()
-        self._STARTPROBE= 13 
-        self.count= 0  
+        
 
         
     def addUniq(self, player_name):
-        
+        """" addUniq: function searches for a unique number for a given player; checks if already in set of names
+                          and loops to until a number is unique in the dictionary keys"""
         checkKey= -1
         
         if player_name in self.getMap():
@@ -35,6 +36,7 @@ class KeyChain:
             _Done= False
             
             while not _Done:
+                ''' loop and call createKey until value is unique in player dictionary'''
                 checkKey= self.createKey(player_name, i= trial)
                 
                 # check if key is a positive and unique integer
@@ -43,39 +45,46 @@ class KeyChain:
                     
                 trial += 1   
         
-        if self.getCount() == (self.getProbe()):
-            self._STARTPROBE= self.getProbe() * 2
-            
-        self.getPlayers()[checkKey]= player_name
         self.count= self.getCount() + 1
+        self.getPlayers()[checkKey]= player_name
+        
+        if self.getCount() == self.getProbe()-1:
+            self.setProbe()
         
         return checkKey      
     
     
     def createKey(self, player_name, i):
             
-        return ( ( sum( [ord(n) for n in player_name] ) + ( (2**i)*(3**i) ) ) % self._STARTPROBE )
+        return ( ( sum( [ord(n) for n in player_name] ) + ( (2**i)*(3**i) ) ) % self.getProbe() )
     
     
-    def getMap(self):
+    def getMap(self):                     
+        """ return set checkMap; set of names """
         return self.checkMap
     
-    def getPlayers(self):
+    def getPlayers(self):                 
+        """ return dictionary _dictPlayer; key- int key and value- string names """
         return self._dictPlayer
     
-    def getCount(self):
-        return self.count
+    """ getters for count and probe """
+    def getCount(self):  return self.count
+    def getProbe(self):  return self._STARTPROBE
     
-    def getProbe(self):
-        return self._STARTPROBE
+    
+    def setProbe(self): 
+        """ setProbe- set value of probe increase number to have in unique keys """
+        self._STARTPROBE *= 2
+    
     
     def __len__(self):
-        return len(self._dictPlayer.keys())
+        return len(self.getPlayers().keys())
     
     def __repr__(self):
         print(f"\tKeys{' '*3}Players\n\t----{' '*3}-------\n")
         for k, v in self.getPlayers():
             print(f"\t{k:5d}  ", v)
+    
     
     
     
