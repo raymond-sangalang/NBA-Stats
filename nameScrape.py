@@ -1,10 +1,9 @@
 # Raymond Sangalang
 # back end to application: reads and stores data from the file and allows searches for data
-
-import re, requests, playerDB
-import playerDB as _pDB
-from requests.exceptions import HTTPError
+import re, requests, KeyChain, playerDB as _pDB
+from requests.exceptions import HTTPError 
 from bs4 import BeautifulSoup
+from KeyChain import KeyChain
 
 
 _TEAMFILE= "team_file.csv"
@@ -13,17 +12,15 @@ class Name:
 
     def __init__(self, _fileName=''):
         ''' Constructor- requests(interface)  '''
-        
-        
+
         curr_year= re.search("(20[\d]+)",_fileName)[0]      #current year    
         self.players = {}
         self.listOfStats = []     # listOfStats --> rank, game played, min/game, off-reb/game, def-reb/game, reb/game, wins
         
-        
         _conn= _pDB.connect_SQL() # connect a database through sqlite3 into file _nbaPlayer.db 
         _pDB.createTables(_conn)  # create table if do not exist
 
-            
+        keyf= KeyChain()
         content= requests.get(_fileName)                 # creates HTML page object from request
         content.raise_for_status()
         
@@ -45,8 +42,7 @@ class Name:
             
             self.players[fname+' '+lname] = [ pos, *self.listOfStats ]
 
-            print(f"{f'{fname} {lname} {pos} {team}':30s} ==> {', '.join([str(i) for i in self.listOfStats])}\n")
-            
+            ###print(f"{f'{fname} {lname} {pos} {team}':30s} ==> {', '.join([str(i) for i in self.listOfStats])}\n")
             
             ''' Set Values for tables'''
             # YearOfPlayer entities: name+year--team--ranking
@@ -62,38 +58,16 @@ class Name:
             playerObj= [fname+' '+lname, pos]                   
         
             '''  Inserting values into the tables- 1) playersYear  2) StatsOfPlayer  3) Player  '''
-            _pDB.add_to_tables(_conn, playerYear, player_stats, playerObj)
+            _pDB.add_to_tables(_conn, playerYear, player_stats, playerObj, keyf)
    
-
         _conn.close() # close connection 
  
             
-            
 
- 
-            
-            
     def match_tag(self, _tag):
         '''match_tag:  boolean return utilized for search in web parsing'''
         return True if ( _tag and ( _tag.startswith('oddrow')  or  _tag.startswith('evenrow') ) ) else False
     
-    
     def __len__(self): 
         ''' returned of contained value in object '''
         return len(self.players)
-
-
-
-        
-
-
-
-
-
-    
-    
-
-        
-        
-        
-        
