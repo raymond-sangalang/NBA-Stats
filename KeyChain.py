@@ -6,8 +6,6 @@ for each player, they will contain their own individual (unique) key
         - search for key in output file with player names and key
 '''
 
-_DEFAULTFILE= "playerKey.txt"
-
 class KeyChain:
     """ start chaining with initial prime number mod and keep count, then
         increment probe """
