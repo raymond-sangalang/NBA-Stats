@@ -4,7 +4,6 @@ for each player, they will contain their own individual (unique) key
     Key utilized for the join of tables in SQL
         - create key algorithm; condition if key already exists
         - search for key in output file with player names and key
-        - 
 '''
 
 _DEFAULTFILE= "playerKey.txt"
