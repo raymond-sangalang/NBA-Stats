@@ -53,8 +53,6 @@ class Name:
     
             
             # Player attributes/entities: name(first and last), basketball position, and unique Key
-            ''' ****_come back to creating key class_****   ****_Split name_****might be useful in search '''
- 
             playerObj= [fname+' '+lname, pos]                   
         
             '''  Inserting values into the tables- 1) playersYear  2) StatsOfPlayer  3) Player  '''
