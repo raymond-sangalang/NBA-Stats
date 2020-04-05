@@ -14,12 +14,10 @@ class KeyChain:
       
     
     def __init__(self):   
-        
         self._dictPlayer= {}
         self.checkMap= set()
         
 
-        
     def addUniq(self, player_name):
         """ addUniq: function searches for a unique number for a given player; checks if already in set of names
                           and loops to until a number is unique in the dictionary keys"""
