@@ -77,6 +77,7 @@ def add_Player(_cur, name, year, keyf):
     if key != -1:
         _cur.execute("""INSERT INTO Player (f_name, l_name, year, key)
                     VALUES(?,?,?,?)""", (f_name, l_name, year, key))
+        
     else:
         update_Player(_cur, list_vals=[f_name, l_name, year])
    
@@ -87,12 +88,17 @@ def add_to_tables(_conn, playerYear, player_stats, playerObj, keyf):
     
     _cur= _conn.cursor()
     
-    add_playersYear(_cur, *playerYear)
-    add_stats(_cur, *player_stats)
-    add_Player(_cur, *playerObj, keyf)         
+    if check_records(_cur, playerObj[0]):
+        """ check records to see if name already exists in database """
+        pass
     
-    print('\nLength of Dictionary:', len(keyf))
-    ##_conn.commit()
+    else:
+        
+        add_playersYear(_cur, *playerYear)
+        add_stats(_cur, *player_stats)
+        add_Player(_cur, *playerObj, keyf)         
+
+    _conn.commit()
     
     
     
@@ -103,6 +109,21 @@ def check_Tables(_cur):
         _cur.execute("""DROP TABLE if exists YearOfPlayer """)   
         _cur.execute("""DROP TABLE if exists StatsOfPlayer """)   
         _cur.execute("""DROP TABLE if exists Player """)     
+        
+        
+def check_records(_cur, name):
+    """ check_records- Select on query to see if specific name exists in database
+                       will return bool value(values in/None) """
+    
+    (f_name, l_name) = name.split(' ', 1)
+    
+    _cur.execute("""Select f_name,
+                           l_name
+                    FROM Player
+                    WHERE f_name = ?  
+                          AND l_name = ?""",(f_name, l_name))
+    
+    return _cur.fetchone()                                           # return values in or None from Select query
     
     
     
