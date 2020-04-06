@@ -7,6 +7,7 @@ from KeyChain import KeyChain
 
 
 _TEAMFILE= "team_file.csv"
+keyf= KeyChain()
 
 class Name:
 
@@ -20,7 +21,7 @@ class Name:
         _conn= _pDB.connect_SQL() # connect a database through sqlite3 into file _nbaPlayer.db 
         _pDB.createTables(_conn)  # create table if do not exist
 
-        keyf= KeyChain()
+        
         content= requests.get(_fileName)                 # creates HTML page object from request
         content.raise_for_status()
         
