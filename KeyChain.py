@@ -1,4 +1,4 @@
-# Create KeyChain
+# KeyChain.py
 '''
 for each player, they will contain their own individual (unique) key
     Key utilized for the join of tables in SQL
@@ -6,18 +6,20 @@ for each player, they will contain their own individual (unique) key
         - search for key in output file with player names and key
 '''
 
+
 class KeyChain:
     """ start chaining with initial prime number mod and keep count, then
         increment probe """
     _STARTPROBE= 13 
     count= 0 
-      
     
     def __init__(self):   
+        """ Constructor- contains a dictionary with integer keys associated name values,
+                         checkMap set holds names to evaluate one user (one-to-one functionality) """
         self._dictPlayer= {}
         self.checkMap= set()
         
-
+    
     def addUniq(self, player_name):
         """ addUniq: function searches for a unique number for a given player; checks if already in set of names
                           and loops to until a number is unique in the dictionary keys"""
@@ -43,15 +45,21 @@ class KeyChain:
         self.count= self.getCount() + 1
         self.getPlayers()[checkKey]= player_name
         
-        if self.getCount() == self.getProbe()-1:
+        if self.getCount() == self.getProbe()-3:
             self.setProbe()
+        
+        print(f'count: {self.getCount()}\tprobe: {self.getProbe()}')
         
         return checkKey      
     
     
-    def createKey(self, player_name, i):
-            
-        return ( ( sum( [ord(n) for n in player_name] ) + ( (2**i)*(3**i) ) ) % self.getProbe() )
+    def createKey(self, player_name, i=0):
+        """ createKey- adds all letters in players name by ascii values and adds multiple of
+                            prime factors + number trial, then mod probe; this provides a 
+                            limitation to a number separation in keys                        """
+        
+        asciName= sum( [ord(n) for n in player_name] )
+        return ( (asciName + ( (2**i)*(3**i) ) + i ) % self.getProbe() )
     
     
     def getMap(self):                     
