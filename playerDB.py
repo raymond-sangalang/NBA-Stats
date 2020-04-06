@@ -1,4 +1,4 @@
-"""Player database- """
+""" PlayerDB - Player database """
 import sqlite3, os
 from sqlite3 import Error
 
@@ -33,19 +33,19 @@ def createTables(_conn):
                       
     check_Tables(_cur)                              # condition: if tables exist recreate, else creating new tables
         
+    if _cur.fetchone() == None:     
+        _cur.execute("""CREATE TABLE YearOfPlayer
+                (player_year text, team text, rank integer)""")
         
-    _cur.execute("""CREATE TABLE YearOfPlayer
-            (player_year text, team text, rank integer)""")
+                                                        # rebound<related to def and off reb>
+        _cur.execute("""CREATE TABLE StatsOfPlayer
+                (game_played integer, min_per_game real,
+                off_reb_per_game real, def_reb_per_game real,
+                reb_per_game real, wins real)""")
     
-                                                    # rebound<related to def and off reb>
-    _cur.execute("""CREATE TABLE StatsOfPlayer
-            (game_played integer, min_per_game real,
-            off_reb_per_game real, def_reb_per_game real,
-            reb_per_game real, wins real)""")
-
-                                                    # provided a creation of key for lookup
-    _cur.execute("""CREATE TABLE Player
-                (f_name text, l_name, year integer, key integer primary key not null)""")    
+                                                        # provided a creation of key for lookup
+        _cur.execute("""CREATE TABLE Player
+                    (f_name text, l_name, year integer, key integer primary key not null)""")    
     _conn.commit() # save changes 
 
 
@@ -77,10 +77,10 @@ def add_Player(_cur, name, year, keyf):
     if key != -1:
         _cur.execute("""INSERT INTO Player (f_name, l_name, year, key)
                     VALUES(?,?,?,?)""", (f_name, l_name, year, key))
-        
-    else:
-        update_Player(_cur, list_vals=[f_name, l_name, year])
-   
+    # In progress
+    '''else:
+        update_Player(_cur, tup_vals=(f_name, l_name, year, key))
+    '''
     
 def add_to_tables(_conn, playerYear, player_stats, playerObj, keyf):
     ''' add_to_tables: function taking 3 list arguments to insert into all three tables
@@ -127,15 +127,18 @@ def check_records(_cur, name):
     
     
     
-def update_Player(_cur, list_vals= []):
+def update_Player(_cur, tup_vals= ()):
     ''' update_Player: param: sql connection, tuple of first name, last name, and year'''
     
-    update_p= ''' UPDATE Player
+    update_p= f''' UPDATE Player
                   SET year = ? , 
                       key = ? 
-                  WHERE f_name = ? , 
-                        l_name = ?   '''
-                                 
-    key = keyf.addUniq(f"{list_vals[0]} {list_vals[1]}")
-    if key != -1:
-        _cur.execute( update_p, tuple( list_vals.append(key) ) ) 
+                  WHERE f_name = {tup_vals[0]} , 
+                        l_name = {tup_vals[1]}   '''
+    key = tup_vals[-1]                            
+
+    while key != -1:
+        key = keyf.addUniq(f"{tup_vals[0]} {tup_vals[1]}")
+        
+    tup_vals= list(tup_vals[0:3]).append(key)    
+    _cur.execute(update_p,tuple(tup_vals)) 
