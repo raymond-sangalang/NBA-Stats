@@ -74,6 +74,17 @@ class KeyChain:
     def getCount(self):  return self.count
     def getProbe(self):  return self._STARTPROBE
     
+    def getKey(self, name):
+        ''' search dictionary values for associated name and return key '''
+        
+        if name not in self.getPlayers().items():
+            return -1
+        
+        for key, val in self.getPlayers().items():
+            if val == name:
+                return key
+            
+    
     
     def setProbe(self): 
         """ setProbe- set value of probe increase number to have in unique keys """
@@ -87,21 +98,3 @@ class KeyChain:
         print(f"\tKeys{' '*3}Players\n\t----{' '*3}-------\n")
         for k, v in self.getPlayers():
             print(f"\t{k:5d}  ", v)
-    
-    
-    
-    
-"""
-if __name__ == "__main__":
-    
-    keyf= KeyChain()
-    stringArr= ['LeBron James', 'Chris Paul', 'Stephen Curry', 'Kevin Durant', 'Anthony Davis',
-                'James Harden', 'Giannis Antetokounmpo', 'Joel Embiid', 'Russell Westbrook',
-                'Ryan Arcidiacono', 'Kris Dunn', 'Zach Lavine', 'Draymond Green', 'Klay Thompson',
-                'Chris Paul', 'Andre Iguodala', 'Dirk Nowitzki', 'Nick Collison', 'Manu Ginobili',
-                'Tim Duncan', 'LaMarcus Aldridge', 'Channing Frye', 'Kevin Love', 'Dwight Howard']
-    
-    for i in stringArr:
-        print(keyf.addUniq(i),': ', i)
-"""
-
