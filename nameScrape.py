@@ -18,7 +18,6 @@ class Name:
         self.listOfStats = []                               # listOfStats --> rank, game played, min/game, off-reb/game, def-reb/game, reb/game, wins
         
         _conn= _pDB.connect_SQL()                           # connect a database through sqlite3 into file _nbaPlayer.db 
-        _pDB.createTables(_conn)                            # create table if do not exist
         
         content= requests.get(_fileName)                    # creates HTML page object from request
         content.raise_for_status()
@@ -42,7 +41,7 @@ class Name:
             self.players[fname+' '+lname] = [ pos, *self.listOfStats ]
             
             
-            ''' Set Values for tables'''#Player- f_name, l_name, pos, year, key
+            ''' Set Values for tables'''
             # YearOfPlayer entities: name+year--team--ranking
             playerYear= [ team, int(self.listOfStats[0]), curr_year ]
             
