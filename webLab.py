@@ -1,8 +1,11 @@
 # Raymond Sangalang
 #         - The program implements UI(user-interface) to communicate with user and retrives data from the Names(back-end database) to
 #           compile data from a file and allow searching of data
-from nameScrape import Name, re, requests
+from nameScrape import Name, re, requests, _pDB
 
+
+_conn= _pDB.connect_SQL()                           # connect a database through sqlite3 into file _nbaPlayer.db 
+_pDB.createTables(_conn)                            # create table if do not exist
 
 class UI:
     ''' UI(user-interface)- implements front-end app: constructor for file, and run method to utilize methods
@@ -11,6 +14,7 @@ class UI:
 
     # WebScrape/Crawl into espn files
     __STARTFILE= "http://www.espn.com/nba/statistics/rpm/_/year/" 
+    
 
 
     def __init__(self):
@@ -19,7 +23,7 @@ class UI:
         for num_year in range(2014, 2021):
             ''' Collecting data in years starting from 2014 to 2020 '''
             
-            print(f"\n\n\t\tYEAR: {num_year-1}-{num_year}\n\t\t{'-'*15}\n")
+            print(f"\n\n\t\tYEAR: {num_year-1}-{num_year}\n\t\t{'-'*15}\nData obtained:\n")
             
             # file pages differ, such that current year omits a partition of string
             filetouse= self.__STARTFILE+str(num_year)  if num_year <= 2021  else self.__STARTFILE[:-8]
@@ -56,6 +60,7 @@ class UI:
 
 if __name__ == "__main__":
     app= UI()
+
 
 
 
