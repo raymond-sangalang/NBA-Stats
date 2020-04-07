@@ -12,7 +12,7 @@ def connect_SQL():
     
    
     try:
-        return sqlite3.connect(_DATABASE, detect_types=sqlite3.PARSE_DECLTYPES)         # return successful connection and acqruire registered 
+        return sqlite3.connect(_DATABASE, detect_types=sqlite3.PARSE_DECLTYPES)         # return successful connection and acquire registered 
                                                                                         #      data types, otherwise catch error 
     except sqlite3.Error as e:
         raise sqlite3.Error("ERROR:", str(e))
@@ -28,17 +28,17 @@ def createTables(_conn):
               3- rebs of players ==> off_rpg, def_rpg, total_rpg, year, key
               4 - player ==> first name, last name, position and key; linked primary key                      '''
     
-    
     _cur= _conn.cursor()
     _cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Player' ''')
     
                       
     check_Tables(_cur)                              # condition: if tables exist recreate, else creating new tables
-        
-    if _cur.fetchone() == None:  
+    createNewTable(_cur)
+    if _cur.fetchone() != None: 
+        print(f'\n\tCREATING NEW TABLES\n\t{"-"*19}\n')
         createNewTable(_cur)
 
-    _conn.commit() # save changes 
+    _conn.commit()                                  # save changes 
 
 def createNewTable(_cur):
     
@@ -51,7 +51,7 @@ def createNewTable(_cur):
     
     _cur.execute("""CREATE TABLE RebOfPlayer
             (off_reb_per_game real, def_reb_per_game real, reb_per_game real, 
-             year, key integer not null)""")                                  # reb/game(off ^ def) --- sort by key ^ year    
+             year, key integer not null)""")                                        # reb/game(off ^ def) --- sort by key ^ year    
 
     _cur.execute("""CREATE TABLE Player
                 (first_name text, last_name text, position text, key integer primary key not null)""")    
@@ -85,14 +85,16 @@ def add_reb(_cur, off_reb_per_game, def_reb_per_game, reb_per_game, year, key):
                 VALUES(?,?,?,?,?)""", (off_reb_per_game, def_reb_per_game, reb_per_game, year, key))    
     
     
-def add_Player(_cur, name, pos, key):
+def add_Player(_conn, name, pos, key):
     ''' add_Player: inputting a new players(objects for data) with attributes by name and years played '''
     
     (first_name, last_name) = name.split(' ', 1)                                # split name for optional search values
     
     if key != -1:
+        _cur= _conn.cursor()
         _cur.execute("""INSERT INTO Player (first_name, last_name, position, key)
                     VALUES(?,?,?,?)""", (first_name, last_name, pos, key))
+        _conn.commit()
     
     
     
@@ -102,19 +104,20 @@ def add_to_tables(_conn, playerYear, player_stats, player_reb, playerObj, keyf):
                        as a function decorator'''
     
     _cur= _conn.cursor()
+    name= playerObj[0]             # player name
     
-    name= playerObj[0]
-    key= keyf.addUniq(name)
     
-    print(f'{key:4d}: {name}')
-    
-    if (check_records(_cur, playerObj[0]) == None) or key != -1:
-        """ check records to see if name(object/player) already exists in database """ 
+    if (check_records(_cur, playerObj[0]) == None):
+        """ check records to see if name(object/player) already exists in database 
+                         return tuple of value or None""" 
         
-        key= keyf.getKey(name)                # get original key to use
-        add_Player(_cur, *playerObj, key)
+        key= keyf.addUniq(name)
+        add_Player(_conn, *playerObj, key)
         _conn.commit()
         
+    else:
+        key= keyf.getKey(name)             # get original key to use if object in records
+            
             
     add_playersYear(_cur, *playerYear, key)
     _conn.commit()
@@ -143,8 +146,7 @@ def check_records(_cur, name):
     
     (f_name, l_name) = name.split(' ', 1)
     
-    _cur.execute("""Select first_name,
-                           last_name
+    _cur.execute("""Select last_name
                     FROM Player
                     WHERE first_name = ?  
                           AND last_name = ?""",(f_name, l_name))
@@ -153,27 +155,9 @@ def check_records(_cur, name):
     
     
     
-def update_Player(_cur, tup_vals= ()):
-    ''' update_Player: param: sql connection, tuple of first name, last name, and position'''
-    
-    update_p= f''' UPDATE Player
-                  SET position = ? , 
-                      key = ? 
-                  WHERE first_name = {tup_vals[0]} , 
-                        last_name = {tup_vals[1]}   '''
-    key = tup_vals[-1]                            
-
-    while key != -1:
-        key = keyf.addUniq(f"{tup_vals[0]} {tup_vals[1]}")
-        
-    tup_vals= list(tup_vals[0:3]).append(key)                         # add new key with first 3 values: f_name, l_name, year
-    _cur.execute(update_p,tuple(tup_vals))                            # pass list as tuple for update
-    
-    
- 
 def mutate_obj(year=[]):
-    """ mutate_obj- utilize io byte conversion and numpy functionality save, in order to convert array
-                    object to be taken in SQL database as a numpy array """
+    """ mutate_obj- utilize io byte conversion and numpy functionality save, in order to mutate numpy array
+                    object as an acceptable registered data type in the SQL database                        """
     
     outB= io.BytesIO()
     np.save(outB, year)
@@ -181,20 +165,9 @@ def mutate_obj(year=[]):
     return sqlite3.Binary(outB.read())
 
 def restore_obj(char_year):
-    
+    """ restore_obj- utilize io byte conversion and numpy functionality load, in order to convert from mutated bytes
+                     object to be loaded as a numpy array                                                            """    
     outArr= io.BytesIO()
     np.save(outArr, year)
     outArr.seek(0)
     return np.load(outArr)
-
-
-'''---------------------------------------------------------------------------------------------------------------------------------
-----> Progress for search items
-SELECT f_name, l_name, pos FROM Player             
-WHERE key=?
-ORDER BY l_name
-
-SELECT year FROM StatsOfPlayer              # to get selected 
-WHERE key=?,year=?
-ORDER BY wins DESC
-------------------------------------------------------------------------------------------------------------------------------------'''
