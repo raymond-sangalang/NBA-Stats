@@ -1,5 +1,4 @@
-# KeyChain.py
-'''
+''' KeyChain.py
 for each player, they will contain their own individual (unique) key
     Key utilized for the join of tables in SQL
         - create key algorithm; condition if key already exists
@@ -27,6 +26,7 @@ class KeyChain:
         
         if player_name in self.getMap():
             return -1
+
         else:
             self.getMap().add(player_name)
             trial= 1
@@ -47,8 +47,6 @@ class KeyChain:
         
         if self.getCount() == self.getProbe()-3:
             self.setProbe()
-        
-        print(f'count: {self.getCount()}\tprobe: {self.getProbe()}')
         
         return checkKey      
     
@@ -76,9 +74,6 @@ class KeyChain:
     
     def getKey(self, name):
         ''' search dictionary values for associated name and return key '''
-        
-        if name not in self.getPlayers().items():
-            return -1
         
         for key, val in self.getPlayers().items():
             if val == name:
