@@ -1,7 +1,8 @@
 """ Player database                              ---> DATABASE <--- 
 ------------------------------------------------------------------------------------------------------------------------------------"""
 import sqlite3, os
-import io, numpy as np
+import string, io, numpy as np
+
 _DATABASE= '_nbaPlayer.db'
 
 
@@ -26,7 +27,7 @@ def createTables(_conn):
               1- players years ==> same/new team, rank, and years(numpy array); linked year to table 3 ^ 4
               2- stats of player ==> games played, min/game, reb/game, wins, year, key
               3- rebs of players ==> off_rpg, def_rpg, total_rpg, year, key
-              4 - player ==> first name, last name, position and key; linked primary key                      '''
+              4- player ==> first name, last name, position and key; linked primary key                      '''
     
     _cur= _conn.cursor()
     _cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Player' ''')
@@ -39,6 +40,7 @@ def createTables(_conn):
         createNewTable(_cur)
 
     _conn.commit()                                  # save changes 
+
 
 def createNewTable(_cur):
     
@@ -56,7 +58,7 @@ def createNewTable(_cur):
     _cur.execute("""CREATE TABLE Player
                 (first_name text, last_name text, position text, key integer primary key not null)""")    
     
-    
+
     # responsible for serializing data of (array / numpy array) --> storing as bytes for sql compatibility
     sqlite3.register_adapter(np.ndarray, mutate_obj) 
     
@@ -164,10 +166,153 @@ def mutate_obj(year=[]):
     outB.seek(0)
     return sqlite3.Binary(outB.read())
 
+
 def restore_obj(char_year):
     """ restore_obj- utilize io byte conversion and numpy functionality load, in order to convert from mutated bytes
                      object to be loaded as a numpy array                                                            """    
+    
     outArr= io.BytesIO()
-    np.save(outArr, year)
+    np.save(outArr, char_year)
     outArr.seek(0)
     return np.load(outArr)
+
+
+
+""" ----------------------------------------------------------------------------------------------------------------
+    Player (first_name text, last_name text, position text, key integer primary key not null)
+    YearOfPlayer (team text, rank integer, year array, key integer not null) 
+    StatsOfPlayer (game_played integer, min_per_game real, reb_per_game real, wins real, year, key integer not null)
+    RebOfPlayer (off_reb_per_game real, def_reb_per_game real, reb_per_game real, year, key integer not null)        
+    ---------------------------------------------------------------------------------------------------------------- """
+
+
+def search_player(_conn): 
+    """ Player (first_name text, last_name text, position text, key integer primary key not null)                        """   
+    
+    _cur= _conn.cursor()
+
+    l_name= input("Enter Last Name of player: ").replace(" ", '')
+    
+    _cur.execute("""Select * FROM Player
+                     WHERE last_name = ?""",(string.capwords(l_name),))   
+    player_info= _cur.fetchall()
+    
+    if ( player_info == None ):
+        print("Sorry, couldn't find a match")  
+        
+    else:
+        print("\n\nPlayers Found:\n")
+        for row in player_info:
+            print(f'\t{" ".join(row[:2])}, {row[-2]}')
+            
+    return
+
+
+def search_YearOfPlayer(_conn):
+    """ YearOfPlayer (team text, rank integer, year array, key integer not null)  """
+
+    _cur= _conn.cursor()
+    name = getName().split()
+    
+    if not check_records(_cur, ' '.join(name)):
+        print("player does not exist")
+        
+    else:
+        
+        _cur.execute("""Select * FROM Player
+                         WHERE last_name = ? AND first_name = ?""",(name[-1],name[0],))   
+        player_info= _cur.fetchone()        
+        
+        _cur.execute("""Select * FROM YearOfPlayer
+                         WHERE key = ?""",(player_info[-1],))    
+        player_year=_cur.fetchall()
+        
+        print(f"\n\t{' '.join(name)}'s overall years:\n")
+        
+        for played in player_year:
+            print(f'{restore_obj(played[-2])}:\t', ' '.join([f"{str(i):>5}" for i in list(played[:-2])]))   
+
+    return
+    
+    
+def search_StatsOfPlayer(_conn):
+    """ StatsOfPlayer (game_played integer, min_per_game real, reb_per_game real, wins real, year, key integer not null)  """
+    
+    _cur= _conn.cursor()
+    name = getName().split()
+    
+    if not check_records(_cur, ' '.join(name)):
+        print("player does not exist")
+        
+    else:
+        _cur.execute("""Select * FROM Player
+                         WHERE last_name = ? AND first_name = ?""",(name[-1],name[0],))   
+        player_info= _cur.fetchone()        
+       
+        _cur.execute("""Select * FROM StatsOfPlayer
+                         WHERE key = ?""",(player_info[-1],))    
+        player_stats=_cur.fetchall()
+       
+        sp, da = ' ', '-'
+        print(f"\n\t{' '.join(name)}'s overall plus-minus stats per year:\n" +
+                 f'Year{sp*8}GP  MPG   RPG   WINS\n{da*4+sp*8+da*2+sp*2+da*4+sp+da*5+sp+da*5}' )   
+        
+        for stats in player_stats:
+            print(f'{stats[-2]}\t', ' '.join([f"{str(i):>5}" for i in list(stats[:-2])]))    
+ 
+    return
+
+
+def search_RebOfPlayer(_conn):
+    """ RebOfPlayer (off_reb_per_game real, def_reb_per_game real, reb_per_game real, year, key integer not null)  """
+   
+    _cur= _conn.cursor()
+    name = getName().split()
+    
+    if not check_records(_cur, ' '.join(name)):
+        print("player does not exist")
+        
+    else:
+        dash= "-"*5
+        
+        _cur.execute("""Select * FROM Player
+                         WHERE last_name = ? AND first_name = ?""",(name[-1],name[0],))    
+        player_info= _cur.fetchone()        
+       
+        _cur.execute("""Select * FROM RebOfPlayer
+                         WHERE key = ?""",(player_info[-1],))    
+        player_reb=_cur.fetchall()
+        
+        print(f"\n\t{' '.join(name)}'s overall plus-minus rebs per year:\n" + 
+                      f'Year \t', f'OFF{" "*3}DEF\n{dash}\t {dash+" "+dash}')
+        for reb in player_reb:
+            print(f'{reb[-2]}:\t', ' '.join([f"{str(i):>5}" for i in list(reb[:-3])]))    
+
+    return
+
+
+def getName():
+    
+    f_name= input("Enter First Name of player: ").replace(" ", '')
+    l_name= input("Enter Last Name of player: ").replace(" ", '')
+    return string.capwords(f_name + ' ' + l_name)
+
+
+
+"""    
+def update_Player(_cur, tup_vals= ()):
+    ''' update_Player: param: sql connection, tuple of first name, last name, and position'''
+
+    update_p= f''' UPDATE Player
+                  SET position = ? , 
+                      key = ? 
+                  WHERE first_name = {tup_vals[0]} , 
+                        last_name = {tup_vals[1]}   '''
+    key = tup_vals[-1]                            
+
+    while key != -1:
+        key = keyf.addUniq(f"{tup_vals[0]} {tup_vals[1]}")
+        
+    tup_vals= list(tup_vals[0:3]).append(key)                         # add new key with first 3 values: f_name, l_name, year
+    _cur.execute(update_p,tuple(tup_vals))                            # pass list as tuple for update
+"""
