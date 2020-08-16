@@ -8,8 +8,6 @@ from KeyChain import KeyChain
 _TEAMFILE= "team_file.csv"
 keyf= KeyChain()
 
-
-
 class Name:
 
     def __init__(self, _fileName= '', _pDB= None, teamDict= {}):
@@ -27,6 +25,8 @@ class Name:
         soup= BeautifulSoup(content.text,'html.parser')                        # flexible HTML parser-BeautifulSoup-gets python byte string from request obj
         table= soup.find('table', {'class': 'tablehead'})
 
+        self.keyHolder= keyf
+        
         
         for tr in table.find_all('tr', {'class': self.match_tag}):
             
@@ -54,7 +54,8 @@ class Name:
             player_reb= listOfStats[3:6] + [curr_year]
             
             # Player attributes/entities: name(first and last), basketball position, and unique Key
-            playerObj= [fname+' '+lname, pos]                   
+            playerObj= [fname + ' ' + lname, pos]                   
+        
         
             '''  Inserting values into the tables- 1) playersYear  2) StatsOfPlayer  3) Player  '''
             _pDB.add_to_tables(_conn, playerYear, player_stats, player_reb, playerObj, keyf)
@@ -68,6 +69,9 @@ class Name:
     def match_tag(self, _tag):
         '''match_tag:  boolean return utilized for search in web parsing'''
         return True if ( _tag and ( _tag.startswith('oddrow')  or  _tag.startswith('evenrow') ) ) else False
+    
+    def getKey(self, name):
+        return keyf.getKey(name)
     
     
     def __len__(self): 
