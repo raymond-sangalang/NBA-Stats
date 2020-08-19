@@ -3,6 +3,7 @@
            the Names(back-end database) to compile data from a file and allow searching of data      '''                                                                   
 from nameScrape import Name, re, requests, keyf
 import string, playerDB
+from playerDB import nbaDatabase
 
 import nameScrape
 
@@ -19,8 +20,25 @@ class UI:
     def __init__(self):
         ''' constructor: keep looping until file is able to be read in, then create Name object '''
         
-        self.playerBase= playerDB
+        try:
+            
+            with open("filename.txt", 'r')  as filename:
+                _fileLines= filename.readline()
+                recent_year= int(re.search("(20[\d]+)",_fileLines).group(1))
+                recent_page= int(re.search("page\/([\d]+)",_fileLines).group(1)) - 1
+                print (f"Web page: {_fileLines}\nRecent Year: {recent_year}\nRecent Page: {recent_page}")
+                
+        except IOError:
+            
+            print("Creating File: filename.txt")
+            filename = open("filename.txt", "w")
+            filename.close()
+            recent_year= 2014
+        
+        
+        self.playerBase= nbaDatabase()
         _conn= self.playerBase.connect_SQL()                                          # connect database through sqlite3 into .db file 
+  
         self.playerBase.createTables(_conn)                                           # create table if do not exist
         teams= Name.getTeam()
         
@@ -53,8 +71,16 @@ class UI:
                     
                 elif page_count >= 2: 
                     searchWeb= filetouse + f"/page/{ page_count }"
-                         
-            
+                    
+
+                try:
+                    with open("filename.txt", "w")  as filename:
+                        filename.write(searchWeb)
+                  
+                except IOError:
+                    filename = open("filename.txt", "w")
+                    filename.close()
+        
         
 
 
@@ -66,46 +92,43 @@ class UI:
         """ goSearch- function to obtain user input of type of search """
         
         _cur= self.playerBase.connect_SQL()  
-        
-        search_dict= {1: "players", 2 : "years", 3 : "stats", 4 : "rebounds"}
+       
+        _option=0
+        search_dict= {1: "players", 2 : "years", 3 : "stats", 4 : "rebounds", 5 : "End Search"}
         
         db_dict= { 1 : self.playerBase.search_player, 2 : self.playerBase.search_YearOfPlayer, 
                    3 : self.playerBase.search_StatsOfPlayer, 4 : self.playerBase.search_RebOfPlayer }
     
-        try:
-            
-            while True:
-                """ User Selection of search engine """
+        while _option != 5:
+            try:
                 
-                print(f"\nSearch Engine\n{'-'*19} ")
-                [print(f"\t{index}. {values}") for index, values in search_dict.items()]  
+                while True:
+                    """ User Selection of search engine """
+                    
+                    print(f"\nSearch Engine\n{'-'*19} ")
+                    [print(f"\t{index}. {values}") for index, values in search_dict.items()]  
+                    
+                    _option= int(input( "\nEnter Choice: " ))
+                    
+                    if _option == 5: break
+                    else:
+                        print(f"You chose {search_dict[_option]} database!")
+            
+                    db_dict[_option](_cur)
                 
-                _option= int(input( "\nEnter Choice: " ))
-                print(f"You chose {search_dict[_option]} database!")
-          
-                db_dict[_option](_cur)
-          
-               
-        except ValueError:
-            print("index error")
+            except ValueError:
+                print("Index error...")
+                
+            except KeyError:
+                print("Invalid Option...")
             
-        except KeyError:
-            print("\n\t\t ending search....")
-            
+        print("\n\t\t ending search....")
         return
     
 
-    
-    
 
 if __name__ == "__main__":
     app= UI()
     app.goSearch()
 
     print("\n\nreturn 0")
-
-
-
-
-
-
