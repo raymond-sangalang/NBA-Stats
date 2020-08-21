@@ -3,6 +3,7 @@
 import sqlite3, os
 import string, io, re, numpy as np
 
+
 _DATABASE= '_nbaPlayer.db'
 
 class nbaDatabase:
@@ -41,23 +42,23 @@ class nbaDatabase:
             print(f'\n\tCREATING NEW TABLES\n\t{"-"*19}\n')
             self.createNewTable(_cur)
     
-        _conn.commit()                                       # save changes 
-    
-    
+        _conn.commit()                                           # save changes 
+   
+   
     def createNewTable(self, _cur):
         
-        _cur.execute("""CREATE TABLE YearOfPlayer
+        _cur.execute("""CREATE TABLE IF NOT EXISTS YearOfPlayer
                 (team text, rank integer, year array, key integer not null)""")
                                                             
-        _cur.execute("""CREATE TABLE StatsOfPlayer
+        _cur.execute("""CREATE TABLE IF NOT EXISTS StatsOfPlayer
                 (game_played integer, min_per_game real, reb_per_game real, 
                  wins real, year, key integer not null)""")                   
         
-        _cur.execute("""CREATE TABLE RebOfPlayer
+        _cur.execute("""CREATE TABLE IF NOT EXISTS RebOfPlayer
                 (off_reb_per_game real, def_reb_per_game real, reb_per_game real, 
                  year, key integer not null)""")                                        # reb/game(off ^ def) --- sort by key ^ year    
     
-        _cur.execute("""CREATE TABLE Player
+        _cur.execute("""CREATE TABLE IF NOT EXISTS Player
                     (first_name text, last_name text, position text, key integer primary key not null)""")    
         
     
@@ -66,8 +67,8 @@ class nbaDatabase:
         
         # responsible for restoring/transforming numpy array object
         sqlite3.register_converter("array", self.restore_obj)
-    
-    
+  
+  
     def add_playersYear(self, _cur, team, rank, year, key):
         ''' insert function to SQL commands, inputting a players year(TABLE) by rank and team '''
         
@@ -99,9 +100,7 @@ class nbaDatabase:
             _cur.execute("""INSERT INTO Player (first_name, last_name, position, key)
                         VALUES(?,?,?,?)""", (first_name, last_name, pos, key))
             _conn.commit()
-        
-        
-        
+                
         
     def add_to_tables(self, _conn, playerYear, player_stats, player_reb, playerObj, keyf):
         ''' add_to_tables: function taking 3 list arguments to insert into all three tables
@@ -133,7 +132,6 @@ class nbaDatabase:
         _conn.commit()
         
         
-        
     def check_Tables(self, _cur):
         ''' check_Tables- removes tables if they exists'''
         
@@ -158,7 +156,6 @@ class nbaDatabase:
         return _cur.fetchone()                                           # return values in or None from Select query
         
         
-        
     def mutate_obj(self, year=[]):
         """ mutate_obj- utilize io byte conversion and numpy functionality save, in order to mutate numpy array
                         object as an acceptable registered data type in the SQL database                        """
@@ -177,7 +174,6 @@ class nbaDatabase:
         np.save(outArr, char_year)
         outArr.seek(0)
         return np.load(outArr)
-    
     
     
     """ ----------------------------------------------------------------------------------------------------------------
@@ -269,7 +265,6 @@ class nbaDatabase:
         return
     
     
-    
     def search_RebOfPlayer(self, _conn):
         """ RebOfPlayer (off_reb_per_game real, def_reb_per_game real, reb_per_game real, year, key integer not null)  """
        
@@ -298,17 +293,15 @@ class nbaDatabase:
         return
     
     
-    
-    
-    
     def getName(self):
-        
+        """ getName: """
         f_name= input("Enter First Name of player: ").replace(" ", '')
         l_name= input("Enter Last Name of player: ").replace(" ", '')
         return string.capwords(f_name + ' ' + l_name)
     
     
     def getYearsOfPlayer(self, _conn):
+        """ getYearsOfPlayer: """
         _cur= _conn.cursor()
         name = self.getName().split()
         
@@ -326,9 +319,16 @@ class nbaDatabase:
         return [int(re.sub( "[^0-9]", "", str( self.restore_obj(played[-2]) ) )) for played in player_year]  
     
     
+    def getCurrentYearData(self, _conn):
+        """ getCurrentYearData: returns the most recent year obtained in the database """
+        
+        _cur= _conn.cursor()
+        _cur.execute("""Select year FROM YearOfPlayer
+                         WHERE year = (SELECT max(year) FROM YearOfPlayer);""")  
+        return _cur.fetchone()[0]
+        
     
     
-      
     def update_Player(self, _cur, tup_vals= ()):
         ''' update_Player: param: sql connection, tuple of first name, last name, and position'''
     
