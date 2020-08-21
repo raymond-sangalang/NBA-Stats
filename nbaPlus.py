@@ -16,18 +16,6 @@ except ModuleNotFoundError:
 _SERIALIZABLEFILE = "nbaObj.pkl"
 
 
-'''  ==> Note to self:  Create serial class in keychain <== '''
-"""---------------------------------------------------------------------------------------------------------------------------------"""
-"""
-        ### to insert/update
-pklData = pickle.dumps(nbaData, pickle.HIGHEST_PROTOCOL)  
-curr.execute("insert into table (nbaData) values (:nbaData)", sqlite3.Binary(pklData))
-        ### to retrieve data
-curr.execute("Select nbaData from table limit 1")
-for row in curr:
-    data = pickle.loads(str(row['nbaData']))        """
-"""---------------------------------------------------------------------------------------------------------------------------------""" 
-
 def save_object(_obj, filename):
     ''' save_object: Overwrite any existing file in working directory with the filename, written
      in binary(wb) as a pickle file.                                            '''
@@ -146,5 +134,3 @@ class UI:
 if __name__ == "__main__":
     app= UI()
     app.goSearch()
-
-    print("\n\nreturn 0")
