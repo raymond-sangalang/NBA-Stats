@@ -16,8 +16,20 @@ except ModuleNotFoundError:
 _SERIALIZABLEFILE = "nbaObj.pkl"
 
 
+'''  ==> Note to self:  Create serial class in keychain <== '''
+"""---------------------------------------------------------------------------------------------------------------------------------"""
+"""
+        ### to insert/update
+pklData = pickle.dumps(nbaData, pickle.HIGHEST_PROTOCOL)  
+curr.execute("insert into table (nbaData) values (:nbaData)", sqlite3.Binary(pklData))
+        ### to retrieve data
+curr.execute("Select nbaData from table limit 1")
+for row in curr:
+    data = pickle.loads(str(row['nbaData']))        """
+"""---------------------------------------------------------------------------------------------------------------------------------""" 
+
 def save_object(_obj, filename):
-    ''' Overwrite any existing file in working directory with the filename, written
+    ''' save_object: Overwrite any existing file in working directory with the filename, written
      in binary(wb) as a pickle file.                                            '''
 
     with open(filename, 'wb') as outFile:
@@ -25,7 +37,6 @@ def save_object(_obj, filename):
 
         
 def load_object(filename):
-         
     with open(filename, 'rb') as binFile:
         return pickle.load(binFile)
         
@@ -42,26 +53,25 @@ class UI:
     def __init__(self):
         ''' constructor: keep looping until file is able to be read in, then create Name object '''
         
-        
         self.playerBase = load_object(_SERIALIZABLEFILE)
-        recentYear = dt.now().year + 1
+        recentYear = dt.now().year + 1                                               # next year int to stop interation
         _conn= self.playerBase.connect_SQL()                                         # connect database through sqlite3 into .db file 
         
-        if self.playerBase is not None:
+    
+        """ Condition to check if serialized data exists and most current year within the data is up to date """
+        if (self.playerBase is not None) and ( (recentYear-1) == self.playerBase.getCurrentYearData(_conn) ):
             return
+        
         else:
-            self.playerBase= nbaDatabase()          ### ==> [still need to test and check for most current year] <==
+            self.playerBase= nbaDatabase()        
                                                 
-  
         self.playerBase.createTables(_conn)                                           # create table if do not exist
         teams= Name.getTeam()
-        
       
         for num_year in range(2014, recentYear):
             ''' Collecting data in years starting from 2014 to current year '''
             
             print(f"\n\n\t\tYEAR: {num_year-1}-{num_year}\n\t\t{'-'*15}\nProcessing Data...\n")
-            
             
             # file pages differ, such that current year omits a string partition
             filetouse= self.__STARTFILE+str(num_year)  if num_year <= recentYear  else self.__STARTFILE[:-8]
@@ -69,7 +79,6 @@ class UI:
             searchWeb= filetouse
             page_count= 1
             
-                
             while True: 
                 ''' loops until valid file name is read, and if user just entered, then utilizes default file name '''
                 
@@ -99,7 +108,7 @@ class UI:
         """ goSearch- function to obtain user input of type of search """
         
         _cur= self.playerBase.connect_SQL()  
-        _option=0
+        _option= 0
         
         search_dict= {1: "players", 2 : "years", 3 : "stats", 4 : "rebounds", 5 : "End Search"}
         
