@@ -3,7 +3,7 @@
 
 class Player:
 
-    def __init__(self, name="", years=[], minPerGame=[], total_rpg=[], wins=[]):
+    def __init__(self, name="", years=None, minPerGame=None, total_rpg=None, wins=None):
 
         self.name = name
         self.years = years
@@ -26,6 +26,9 @@ class Player:
 
     def getYear_wins(self, year):
         return self.playerStats[year][2]
+
+    def yearsInDB(self):
+        return len(self.years)
 
     def printStats(self):
         print("\n\t\t", self.name)
