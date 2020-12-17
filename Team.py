@@ -13,28 +13,45 @@ class Team:
     def getNumberOfSeats(self):
         return self.numberOfSeats
 
-    def addPlayer(self, player=Player()):
+    def getRoster(self):
+        return self.spots
+
+    def addPlayer(self, player=None):
         """ addPlayer - fills spots on team and takes the shortest amount of years """
-        self.spots.append(player)
+        self.getRoster().append(player)
         self.minimalYears()
 
     def removePlayer(self, delName):
+
+        if len(self) == 0:
+            print("There is no spots to remove off roster")
+            return
         index = 0
         while index < len(self):
             if self.spots[index].toString() == delName:
-                break
+                self.getRoster().pop(index)
+                self.minimalYears()
+                return
             index += 1
-        self.spots.pop(index)
-        self.minimalYears()
+
+        print(f"Could Not Find {delName} on team ")
 
     def minimalYears(self):
 
-        allplayer_years = [len(seat.getYears()) for seat in self.spots]
-        self.numberOfSeats = min(allplayer_years)
+        if len(self) <= 1:
+            self.numberOfSeats = self.getRoster()[0].yearsInDB()
+        else:
+            self.numberOfSeats = min([seat.yearsInDB() for seat in self.getRoster()])
+
+
 
     def print(self):
-        for sp in self.spots:
-            sp.printStats()
+        for spot in self.getRoster():
+            spot.printStats()
+
+    def printRoster(self):
+        for i, name in enumerate(self.getRoster()):
+            print(i+1, str(name))
 
     def __len__(self):
         return len(self.spots)
@@ -64,5 +81,5 @@ if __name__ == "__main__":
     team1.addPlayer(player1)
     team1.addPlayer(player2)
 
-    team1.print()
+    team1.printRoster()
     print("The minimal number of years for all players:", team1.getNumberOfSeats())
