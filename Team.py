@@ -43,22 +43,19 @@ class Team:
         else:
             self.numberOfSeats = min([seat.yearsInDB() for seat in self.getRoster()])
 
-
-
     def print(self):
         for spot in self.getRoster():
             spot.printStats()
 
     def printRoster(self):
         for i, name in enumerate(self.getRoster()):
-            print(i+1, str(name))
+            print(i + 1, str(name))
 
     def __len__(self):
         return len(self.spots)
 
 
 if __name__ == "__main__":
-
     """ check new classes to be robust into the system """
 
     playersName = "Stephen Curry"
@@ -81,5 +78,12 @@ if __name__ == "__main__":
     team1.addPlayer(player1)
     team1.addPlayer(player2)
 
+
     team1.printRoster()
-    print("The minimal number of years for all players:", team1.getNumberOfSeats())
+
+    minYear = team1.getNumberOfSeats()
+    print("The minimal number of years for all players:", minYear,
+          f"\nThe team has {len(team1)} members")
+
+    print(f"\n\t{player1.getName()} average wins: {player1.avgChoice(minYear):.2f}")
+    print(f"\n\t{player2.getName()} average wins: {player2.avgChoice(minYear):.2f}")
