@@ -30,6 +30,35 @@ class Player:
     def yearsInDB(self):
         return len(self.years)
 
+    def getAverage(self, f, numYears):
+
+        yearsToAvg = self.years[self.yearsInDB() - numYears:]  
+        return sum([f(_) for _ in yearsToAvg]) / numYears
+
+    def avgChoice(self, numYears):
+
+        avgDict = {1: self.getYear_minPerGame, 2: self.getYear_totalRPG, 3: self.getYear_wins}
+        fx = None
+
+        try:
+            while True:
+                """ User Selection of search engine """
+
+                print(f"\nSearch Average\n{'-' * 19} "
+                      + "\n1) Minutes per game\n2) Total rebounds per game\n3) Wins per game")
+
+                fx = avgDict[int(input("\nEnter Choice: "))]
+                break
+
+        except ValueError:
+            print("Index error...")
+        except KeyError:
+            print("Invalid Option...")
+
+        return self.getAverage(fx, numYears)
+
+
+
     def printStats(self):
         print("\n\t\t", self.name)
         for year, stat in self.playerStats.items():
@@ -38,3 +67,4 @@ class Player:
 
     def __str__(self):
         return self.name
+
