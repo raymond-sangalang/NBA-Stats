@@ -1,132 +1,143 @@
 # Raymond Sangalang
-# back end to application: reads and stores data from the file and allows searches for data
-import re, requests
-import subprocess
-from bs4 import BeautifulSoup
-from keychain import KeyChain, save_object, load_object
+import requests, os, time, pickle
+from bs4 import BeautifulSoup, Comment
 
-_TEAMFILE = "team_file.csv"
-_SERIALIZABLEFILE = "nbaObj.pkl"
-_webLocation = "currentWebPage.txt"
-keyf = KeyChain()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CACHE_FILE = os.path.join(BASE_DIR, "nbaObj.pkl")
+
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/121.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.basketball-reference.com/",
+    "Connection": "keep-alive",
+}
+
 
 
 class Name:
+    def __init__(self, searchWeb, playerBase, teamDict=None):
+        self.playerBase = playerBase
+        self.teamDict = teamDict or {}
 
-    def __init__(self, _fileName='', _pDB=None, teamDict={}):
-        ''' Constructor- requests(interface)  '''
+        if not searchWeb:
+            print("[INFO] Web scraping disabled.")
+            return
 
-        curr_year = re.search("(20[\d]+)", _fileName)[0]  # current year
-        self.players = {}
-        self.teams = teamDict
+        # Disable cache during development
+        # cached = self.load_cache()
+        # if cached:
+        #     print("[INFO] Loaded cached NBA data.")
+        #     return
 
-        _pDB.connect_SQL()  # connect a database through sqlite3 into file _nbaPlayer.db
-
-        content = requests.get(_fileName)  # creates HTML page object from request
-        content.raise_for_status()
-
-        soup = BeautifulSoup(content.text,
-                             'html.parser')  # flexible HTML parser-BeautifulSoup-gets python byte string from request obj
-        table = soup.find('table', {'class': 'tablehead'})
-
-        key = load_object(_SERIALIZABLEFILE)
-        self.keyHolder = keyf if key is None else key
-
-        for tr in table.find_all('tr', {'class': self.match_tag}):
-            """ get and list all subclasses, td, and string for searching - listOfStats --> rank, game played, 
-                 min/game, off-reb/game, def-reb/game, reb/game, wins                                          """
-
-            _string = str([td.text for td in tr.find_all('td')])
-            listOfStats = re.findall('-?\d+(?:\.\d+)?', _string)
-
-            newsoup = str(tr.find('a'))             # subclass 'a' (contains name, position, team and link to player)
-            name = re.search("(?<=>)(.+)<", newsoup)
-
-            if not name:
-                break
-            name = name.group(1)
-
-            fname, lname = tuple(name.split(' ', 1))  # split into first and last name of player
-
-            pos = re.search(', (\w{1,2})', _string).group(1)  # position
-            team = self.teams[str(
-                re.findall('[A-Z]{2,3}', _string)[-1])]  # get last team name played in year by search of team abbr key
-
-            self.players[fname + ' ' + lname] = [pos, *listOfStats]
+        print("[INFO] Scraping Basketball-Reference...")
+        self.scrape_seasons(start=2018, end=2023)
+        self.save_cache({"done": True})
 
 
-            ''' Set Values for tables'''
-            # YearOfPlayer entities: name+year--team--ranking
-            playerYear = [team, int(listOfStats[0]), curr_year]
+    # caching
+    def load_cache(self):
+        if not os.path.exists(CACHE_FILE):
+            return None
+        with open(CACHE_FILE, "rb") as fileObj:
+            return pickle.load(fileObj)
 
-            # StatsOfPlayer: games played, min/game, off rpg, def rpg, total reb/game, wins= game_played, min_per_game, reb_per_game, wins, year
-            player_stats = [int(listOfStats[1]), float(listOfStats[2]), *[float(i) for i in listOfStats[5:]], curr_year]
-
-            # RebOfPlayer: off_rpg, def_rpg, rpg
-            player_reb = listOfStats[3:6] + [curr_year]
-
-            # Player attributes/entities: name(first and last), basketball position, and unique Key
-            playerObj = [fname + ' ' + lname, pos]
-
-            '''  Inserting values into the tables- 1) playersYear  2) StatsOfPlayer  3) Player  '''
-            _pDB.add_to_tables(playerYear, player_stats, player_reb, playerObj, self.keyHolder)
-            
-        save_object(self.keyHolder, _SERIALIZABLEFILE)
-        _pDB.__disconnect__()  # close connection
+    def save_cache(self, obj):
+        with open(CACHE_FILE, "wb") as fileObj:
+            pickle.dump(obj, fileObj)
 
 
-    def match_tag(self, _tag):
-        """ match_tag:  boolean return utilized for search in web parsing """
-        return True if (_tag and (_tag.startswith('oddrow') or _tag.startswith('evenrow'))) else False
+
+  
+    # Scraping methods
+    def find_table(self, soup, table_id):
+
+        table = soup.find("table", id=table_id)
+        if table:
+            return table
+
+  
+        comments = soup.find_all(string=lambda t: isinstance(t, Comment))
+        for comment in comments:
+            if table_id in comment:
+                comment_soup = BeautifulSoup(c, "html.parser")
+                table = comment_soup.find("table", id=table_id)
+                if table:
+                    return table
+        return None
+
+    def scrape_seasons(self, start, end):
+        for year in range(start, end + 1):
+            try:
+                self.scrape_season(year)
+                time.sleep(2) 
+            except Exception as e:
+                print(f"WARNING: Failed season {year}: {e}")
 
 
-    def getKey(self, name):
-        return keyf.getKey(name)
+    def scrape_season(self, year):
+        url = f"https://www.basketball-reference.com/leagues/NBA_{year}_advanced.html"
+        print(f"Fetching {url}")
+
+        r = requests.get(url, headers=HEADERS, timeout=10)
+        r.raise_for_status()
+
+        soup = BeautifulSoup(r.text, "html.parser")
+        table = self.find_table(soup, "advanced")
 
 
-    def __len__(self):
-        return len(self.players)
+        # Basketball-Reference searches tables within comments
+        if table is None:
+            comments = soup.find_all(string=lambda text: isinstance(text, Comment))
+            for comment in comments:
+                if "advanced_stats" in comment:
+                    comment_soup = BeautifulSoup(c, "html.parser")
+                    table = comment_soup.find("table", {"id": "advanced_stats"})
+                    break
 
-    @staticmethod
-    def getTeam():
-
-        _Done = False
-        _teamIn = {}
-        pattern = re.compile('(?P<Team>[A-Za-z0-9\s]+), (?P<abbrev>[A-Z]+)')
-
-        try:
-            with open(_TEAMFILE, "r") as infile:
-
-                for line in infile:
-                    match = re.search(pattern, line.rstrip())
-
-                    if match is not None:
-                        _teamIn[match.group("abbrev")] = match.group("Team")
+        if table is None:
+            raise RuntimeError("Advanced stats table not found")
 
 
-        except FileNotFoundError:
-            raise FileNotFoundError(
-                f"Cant find {_TEAMFILE}")  # exceptions handle file search, IO streaming, incorrect
-        except ValueError:
-            print("File content invalid.")  # value/type and problem occurrences while running program
+        tbody = table.find("tbody")
+        rows = tbody.find_all("tr")
 
-        return _teamIn
+        for row in rows:
 
+            # finding player name with their corresponding team, postion, and bpm
+            name_td = row.find("td", {"data-stat": "name_display"})
+            if name_td is None:
+                continue
+            name = name_td.get_text(strip=True)
 
-def savePage(arg1, arg2):
-    """ save web page location (year(arg1), page(arg2)) """
-    arg1, arg2 = str(arg1), str(arg2)
-    if not arg1.isdigit() or not arg2.isdigit():
-        print("Invalid arguments")
-        return 1
+      
+            team_td = row.find("td", {"data-stat": "team_name_abbr"})
+            team = team_td.get_text(strip=True) if team_td else ""
+       
+            pos_td = row.find("td", {"data-stat": "pos"})
+            pos = pos_td.get_text(strip=True) if pos_td else ""
 
-    subprocess.call(['sh', './savePage.sh', _webLocation, arg1, arg2])
+            bpm_td = row.find("td", {"data-stat": "bpm"})
+            try:
+                bpm = float(bpm_td.get_text(strip=True)) if bpm_td else 0.0
+            except ValueError:
+                bpm = 0.0
 
+            if not name or not team:
+                continue
 
-def loadPage():
+            print(f"[INSERT] {name} | {team} | {pos} | BPM={bpm} | {year}")
 
-    task = subprocess.Popen(["cut", "-f2", _webLocation], stdout=subprocess.PIPE)
-    recent_web = tuple(int(line) for line in task.stdout)
+            self.playerBase.insert_player(
+                name=name,
+                team=team,
+                position=pos,
+                bpm=bpm,
+                season=year
+            )
 
-    task.wait()
-    return recent_web
