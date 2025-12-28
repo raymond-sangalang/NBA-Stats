@@ -17,22 +17,21 @@ class nbaDatabase:
     def _create_schema(self):
         
         self.cur.execute("""
-        CREATE TABLE IF NOT EXISTS Player (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            first_name TEXT,
-            last_name TEXT,
-            position TEXT,
-            team TEXT,
-            bpm REAL,
-            season INTEGER
-        )
+            CREATE TABLE IF NOT EXISTS Player (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                first_name TEXT,
+                last_name TEXT,
+                position TEXT,
+                team TEXT,
+                bpm REAL,
+                season INTEGER
+            )
         """)
 
         # Indexes 
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_season ON Player(season)")
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_team ON Player(team)")
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_position ON Player(position)")
-
         self.conn.commit()
 
 

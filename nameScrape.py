@@ -1,4 +1,3 @@
-# Raymond Sangalang
 import requests, os, time, pickle
 from bs4 import BeautifulSoup, Comment
 
@@ -21,47 +20,53 @@ HEADERS = {
 
 
 class Name:
+
     def __init__(self, searchWeb, playerBase, teamDict=None):
+        
         self.playerBase = playerBase
         self.teamDict = teamDict or {}
 
         if not searchWeb:
-            print("[INFO] Web scraping disabled.")
+            print("--> Web scraping disabled.")
             return
 
         # Disable cache during development
         # cached = self.load_cache()
         # if cached:
-        #     print("[INFO] Loaded cached NBA data.")
+        #     print("--> Loaded cached NBA data.")
         #     return
 
-        print("[INFO] Scraping Basketball-Reference...")
-        self.scrape_seasons(start=2018, end=2023)
+        print("--> Scraping Basketball-Reference...")
+
+        start_year = 2012
+        end_year = 2026
+        self.scrape_seasons(start= start_year, end= end_year)
         self.save_cache({"done": True})
 
 
     # caching
+
     def load_cache(self):
         if not os.path.exists(CACHE_FILE):
             return None
+
         with open(CACHE_FILE, "rb") as fileObj:
             return pickle.load(fileObj)
+
 
     def save_cache(self, obj):
         with open(CACHE_FILE, "wb") as fileObj:
             pickle.dump(obj, fileObj)
 
-
-
   
     # Scraping methods
+
     def find_table(self, soup, table_id):
 
         table = soup.find("table", id=table_id)
         if table:
             return table
 
-  
         comments = soup.find_all(string=lambda t: isinstance(t, Comment))
         for comment in comments:
             if table_id in comment:
@@ -71,7 +76,9 @@ class Name:
                     return table
         return None
 
+
     def scrape_seasons(self, start, end):
+
         for year in range(start, end + 1):
             try:
                 self.scrape_season(year)
@@ -81,6 +88,7 @@ class Name:
 
 
     def scrape_season(self, year):
+
         url = f"https://www.basketball-reference.com/leagues/NBA_{year}_advanced.html"
         print(f"Fetching {url}")
 
@@ -89,16 +97,6 @@ class Name:
 
         soup = BeautifulSoup(r.text, "html.parser")
         table = self.find_table(soup, "advanced")
-
-
-        # Basketball-Reference searches tables within comments
-        if table is None:
-            comments = soup.find_all(string=lambda text: isinstance(text, Comment))
-            for comment in comments:
-                if "advanced_stats" in comment:
-                    comment_soup = BeautifulSoup(c, "html.parser")
-                    table = comment_soup.find("table", {"id": "advanced_stats"})
-                    break
 
         if table is None:
             raise RuntimeError("Advanced stats table not found")
@@ -131,7 +129,7 @@ class Name:
             if not name or not team:
                 continue
 
-            print(f"[INSERT] {name} | {team} | {pos} | BPM={bpm} | {year}")
+            print(f"Adding new row: {name:30s} | {team:4s} | {pos:3s} | BPM={bpm:5.2f} | {year:5d}")
 
             self.playerBase.insert_player(
                 name=name,
@@ -140,4 +138,3 @@ class Name:
                 bpm=bpm,
                 season=year
             )
-
