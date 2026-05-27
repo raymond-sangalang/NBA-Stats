@@ -1,4 +1,4 @@
-""" Team will acquire a projection of players compared to another instantiated Team
+""" Team.py - Team will acquire a projection of players compared to another instantiated Team
      Note: number of players must meet to compare                                     """
 from player import Player
 
@@ -97,4 +97,3 @@ class Team:
 
     def __iter__(self):
         return iter(self.spots)
-

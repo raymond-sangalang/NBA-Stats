@@ -1,14 +1,16 @@
+# PlayerDB.py
 import sqlite3, os, math
 from collections import defaultdict
-
 
 DB_FILE = "nba.db"
 
 
+
 class nbaDatabase:
     
-    def __init__(self):
-        self.conn = sqlite3.connect(DB_FILE)
+
+    def __init__(self, db_file= ""):
+        self.conn = sqlite3.connect(DB_FILE if not db_file else db_file)
         self.cur = self.conn.cursor()
         self._create_schema()
 
@@ -16,15 +18,30 @@ class nbaDatabase:
     # creating table schema
     def _create_schema(self):
         
+        # Initialize table, Player, and provide its column names with their associated values
         self.cur.execute("""
             CREATE TABLE IF NOT EXISTS Player (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                first_name TEXT,
-                last_name TEXT,
-                position TEXT,
-                team TEXT,
-                bpm REAL,
-                season INTEGER
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                first_name  TEXT,
+                last_name   TEXT,
+                position    TEXT,
+                team        TEXT,
+                bpm         REAL,
+                season      INTEGER
+            )
+        """)
+
+        # Game Data
+        self.cur.execute("""
+            CREATE TABLE IF NOT EXISTS Game (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                game_date       TEXT,
+                season          INTEGER,
+                home_team       TEXT,
+                away_team       TEXT,
+                home_score      INTEGER,
+                away_score      INTEGER,
+                home_win        INTEGER
             )
         """)
 
@@ -33,6 +50,7 @@ class nbaDatabase:
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_team ON Player(team)")
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_position ON Player(position)")
         self.conn.commit()
+
 
 
     # inserting player in Player table
@@ -44,13 +62,15 @@ class nbaDatabase:
 
         self.cur.execute("""
             INSERT INTO Player (first_name, last_name, position, team, bpm, season)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (first, last, position, team, bpm, season))
-
+            VALUES (?, ?, ?, ?, ?, ?) """, (first, last, position, team, bpm, season))
         self.conn.commit()
 
- 
-    # Queries
+
+
+    #
+    # Queries - for generalized and specific queries
+    #
+
     def get_all_players(self):
         
         self.cur.execute("""
@@ -59,6 +79,7 @@ class nbaDatabase:
             ORDER BY season DESC, bpm DESC
         """)
         return self.cur.fetchall()
+
 
     def get_players_by_team(self, team):
         
@@ -70,6 +91,7 @@ class nbaDatabase:
         """, (team,))
         return self.cur.fetchall()
 
+
     def get_players_by_season(self, season):
         
         self.cur.execute("""
@@ -78,6 +100,19 @@ class nbaDatabase:
             WHERE season = ?
             ORDER BY bpm DESC
         """, (season,))
+        return self.cur.fetchall()
+
+
+    def get_all_games(self):
+
+        self.cur.execute("""
+            SELECT
+                home_team,
+                away_team,
+                home_win
+            FROM Game
+        """)
+
         return self.cur.fetchall()
 
 
@@ -115,6 +150,40 @@ class nbaDatabase:
 
         return normalized
 
+    def get_team_avg_bpm(self, team):
 
+        self.cur.execute("""
+            SELECT AVG(bpm)
+            FROM Player
+            WHERE team = ?
+        """, (team,))
+
+        result = self.cur.fetchone()[0]
+
+        return result if result else 0.0
+
+
+
+
+
+    def insert_game(self, game_date, season, home_team, away_team, home_score, away_score):
+
+        home_win = 1 if home_score > away_score else 0
+
+        self.cur.execute("""
+            INSERT INTO Game (game_date, season, home_team, away_team, home_score, away_score, home_win)
+            VALUES (?, ?, ?, ?, ?, ?, ?)""", (game_date, season, home_team, away_team, home_score, away_score, home_win)
+        )
+        self.conn.commit()
+
+
+    def season_exists(self, season):
+
+        self.cur.execute("""SELECT COUNT(*) FROM Player WHERE season = ?""", (season,))
+        return self.cur.fetchone()[0] > 0
+
+
+
+    # closing the connection
     def close(self):
         self.conn.close()

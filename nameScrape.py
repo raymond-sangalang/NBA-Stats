@@ -1,10 +1,24 @@
-import requests, os, time, pickle
+# nameScrape.py
+import requests, os, time 
 from bs4 import BeautifulSoup, Comment
+from datetime import date
+
+# caching     --- removing
+# import pickle
+# CACHE_FILE = os.path.join(BASE_DIR, "nbaObj.pkl")
+# def load_cache(self):
+#     if not os.path.exists(CACHE_FILE):
+#         return None
+#     with open(CACHE_FILE, "rb") as fileObj:
+#         return pickle.load(fileObj)
+# def save_cache(self, obj):
+#     with open(CACHE_FILE, "wb") as fileObj:
+#         pickle.dump(obj, fileObj)
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CACHE_FILE = os.path.join(BASE_DIR, "nbaObj.pkl")
 
-
+# Page headers for request 
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (X11; Linux x86_64) "
@@ -21,7 +35,8 @@ HEADERS = {
 
 class Name:
 
-    def __init__(self, searchWeb, playerBase, teamDict=None):
+    # note: change start_year and replace on line 60
+    def __init__(self, searchWeb, playerBase, teamDict=None, start_year=0):
         
         self.playerBase = playerBase
         self.teamDict = teamDict or {}
@@ -30,36 +45,34 @@ class Name:
             print("--> Web scraping disabled.")
             return
 
-        # Disable cache during development
-        # cached = self.load_cache()
-        # if cached:
-        #     print("--> Loaded cached NBA data.")
-        #     return
-
         print("--> Scraping Basketball-Reference...")
 
-        start_year = 2012
-        end_year = 2026
-        self.scrape_seasons(start= start_year, end= end_year)
-        self.save_cache({"done": True})
+
+        # Given a certain starting year to start from
+        # to the most (or this) current year
+        start_year = 2020
+        end_year = date.today().year
+
+        for year in range(start_year, end_year + 1):
+
+            if self.playerBase.season_exists(year):
+                print(f"Skipping {year} (already scraped)")
+                continue
+
+            try:
+                self.scrape_season(year)
+                time.sleep(2)
+
+            except Exception as e:
+                print(f"WARNING: Failed season {year}: {e}")
 
 
-    # caching
-
-    def load_cache(self):
-        if not os.path.exists(CACHE_FILE):
-            return None
-
-        with open(CACHE_FILE, "rb") as fileObj:
-            return pickle.load(fileObj)
-
-
-    def save_cache(self, obj):
-        with open(CACHE_FILE, "wb") as fileObj:
-            pickle.dump(obj, fileObj)
 
   
+    #
     # Scraping methods
+    #
+
 
     def find_table(self, soup, table_id):
 
@@ -77,6 +90,7 @@ class Name:
         return None
 
 
+
     def scrape_seasons(self, start, end):
 
         for year in range(start, end + 1):
@@ -87,8 +101,14 @@ class Name:
                 print(f"WARNING: Failed season {year}: {e}")
 
 
+
+
+    # scrape_season - takes in the starting year of the web page to scrape
+    #
     def scrape_season(self, year):
 
+
+        # 
         url = f"https://www.basketball-reference.com/leagues/NBA_{year}_advanced.html"
         print(f"Fetching {url}")
 
@@ -106,13 +126,14 @@ class Name:
         rows = tbody.find_all("tr")
 
         for row in rows:
+            print(row.text)
 
             # finding player name with their corresponding team, postion, and bpm
             name_td = row.find("td", {"data-stat": "name_display"})
             if name_td is None:
                 continue
-            name = name_td.get_text(strip=True)
 
+            name = name_td.get_text(strip=True)
       
             team_td = row.find("td", {"data-stat": "team_name_abbr"})
             team = team_td.get_text(strip=True) if team_td else ""
