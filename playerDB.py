@@ -2,20 +2,20 @@
 import sqlite3, os, math
 from collections import defaultdict
 
-DB_FILE = "nba.db"
-
+DB_FILE = "nba.db"   
 
 
 class nbaDatabase:
     
 
+    # Initialize database connection and create schema
     def __init__(self, db_file= ""):
         self.conn = sqlite3.connect(DB_FILE if not db_file else db_file)
         self.cur = self.conn.cursor()
         self._create_schema()
 
     
-    # creating table schema
+    # creating database tables and indexes for the application
     def _create_schema(self):
         
         # Initialize table, Player, and provide its column names with their associated values
@@ -31,7 +31,7 @@ class nbaDatabase:
             )
         """)
 
-        # Game Data
+        # Game Data (results table)
         self.cur.execute("""
             CREATE TABLE IF NOT EXISTS Game (
                 id              INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -53,7 +53,7 @@ class nbaDatabase:
 
 
 
-    # inserting player in Player table
+    # inserting a player's data into the Player table
     def insert_player(self, name, team, position, bpm, season):
         
         parts = name.split(" ", 1)
@@ -71,6 +71,7 @@ class nbaDatabase:
     # Queries - for generalized and specific queries
     #
 
+    # Return all players ordered by season and by their BPM's
     def get_all_players(self):
         
         self.cur.execute("""
@@ -80,7 +81,7 @@ class nbaDatabase:
         """)
         return self.cur.fetchall()
 
-
+    # Return all players for a specified team
     def get_players_by_team(self, team):
         
         self.cur.execute("""
@@ -91,7 +92,7 @@ class nbaDatabase:
         """, (team,))
         return self.cur.fetchall()
 
-
+    # Return all players for a specified season
     def get_players_by_season(self, season):
         
         self.cur.execute("""
@@ -103,6 +104,7 @@ class nbaDatabase:
         return self.cur.fetchall()
 
 
+    # Return all game records in the database
     def get_all_games(self):
 
         self.cur.execute("""
@@ -116,9 +118,10 @@ class nbaDatabase:
         return self.cur.fetchall()
 
 
-    # normalized bpm
+    # Compute the normalized bpm values using z-score normalizaton
     def get_normalized_bpm(self, season):
        
+        # Retrieve BPM values grouped by position
         self.cur.execute("""
             SELECT position, bpm
             FROM Player
@@ -150,6 +153,8 @@ class nbaDatabase:
 
         return normalized
 
+
+    # Return the average BPM for a given team
     def get_team_avg_bpm(self, team):
 
         self.cur.execute("""
@@ -164,11 +169,11 @@ class nbaDatabase:
 
 
 
-
-
+    # Insert the results of a game into the Game table
     def insert_game(self, game_date, season, home_team, away_team, home_score, away_score):
 
-        home_win = 1 if home_score > away_score else 0
+        # Determine if the home team won
+        home_win = 1 if home_score > away_score else 0   
 
         self.cur.execute("""
             INSERT INTO Game (game_date, season, home_team, away_team, home_score, away_score, home_win)
@@ -177,18 +182,27 @@ class nbaDatabase:
         self.conn.commit()
 
 
+
+    # Check whether player data exists for a given season
     def season_exists(self, season):
 
-        self.cur.execute("""SELECT COUNT(*) FROM Player WHERE season = ?""", (season,))
+        self.cur.execute("""
+            SELECT COUNT(*) 
+            FROM Player 
+            WHERE season = ?
+        """, (season,))
         return self.cur.fetchone()[0] > 0
+
 
 
 
 
     # Obtain the range of the seasons in the database
 
+
+    # get_season_range: Returns the earliest and latest season in the database.
     def get_season_range(self):
-        """ get_season_range: Returns the earliest and latest season in the database. """
+        
         self.cur.execute("""
             SELECT MIN(season), MAX(season)
             FROM Player
@@ -197,16 +211,30 @@ class nbaDatabase:
         start_year, end_year = self.cur.fetchone()
         return start_year, end_year
 
+
+    # Return the earliest season stored in the database
     def get_start_year(self):
-        self.cur.execute("SELECT MIN(season) FROM Player")
+  
+        self.cur.execute("""
+            SELECT MIN(season) 
+            FROM Player
+        """)
         return self.cur.fetchone()[0]
 
 
+    # Return the most recent season stored in the database
     def get_end_year(self):
-        self.cur.execute("SELECT MAX(season) FROM Player")
+
+        self.cur.execute("""
+            SELECT MAX(season) 
+            FROM Player
+        """)
         return self.cur.fetchone()[0]
 
+
+    # Return a sorted list of all distinct seasons in the database
     def get_all_seasons(self):
+        
         self.cur.execute("""
             SELECT DISTINCT season
             FROM Player
@@ -215,6 +243,6 @@ class nbaDatabase:
         return [row[0] for row in self.cur.fetchall()]
 
 
-    # closing the connection
+    # Closing the database connection
     def close(self):
         self.conn.close()
