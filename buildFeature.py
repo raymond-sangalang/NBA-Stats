@@ -23,4 +23,4 @@ def build_features(db, home_team, away_team):
     away_bpm = db.get_team_avg_bpm(away_team)
 
     # Return the feature vector for model input
-    return [home_bpm, away_bpm]
+    return [home_bpm, away_bpm, home_bpm, away_bpm]

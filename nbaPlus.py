@@ -10,7 +10,6 @@ start scrape first and separate from user interface - independence
 - scrape
 - UI
 - multiple users (processes)
-
 """
 class UI:
 
@@ -42,11 +41,6 @@ class UI:
                         print("Unknown Entry")
             except ValueError as e:
                 print(f"Error: Incorrect operation value")
-
- 
-            
-
-
 
 
 
@@ -94,9 +88,9 @@ class UI:
                     print(f"Boundaries may overlap with the existing database data ({initial_year_db}-{final_year_db}).")
 
 
-            Name(searchWeb, self.playerBase, teamDict= teams, start_year=start_yr, end_year=end_yr) 
-            game_scraper = GameScraper(self.playerBase)
-            game_scraper.scrape_season_games(2025)
+            name_scraper = Name(searchWeb, self.playerBase, teamDict= teams, start_year=start_yr, end_year=end_yr) 
+            game_scraper = GameScraper(self.playerBase, start_year=start_yr, end_year=end_yr)
+            #game_scraper.scrape_season_games(2025)
 
             print("--> Data loaded successfully.")
 
@@ -106,7 +100,6 @@ class UI:
         except Exception as e:
             print(f"ERROR: Failed to scrape data... Continuing the application.\n {e}")
         
-
 
 
     def show_top_bpm_players(self):
@@ -140,9 +133,7 @@ class UI:
 
     def show_top_players(self):
       
-
-        print("\nTop Players:")
-        
+        print("\nTop Players:")  
         # for player in list(dict.fromkeys(self.playerBase.get_all_players()))[:10]:
         for player in list(dict.fromkeys(self.playerBase.get_normalized_bpm(2026)))[:10]:
             name = f"{player[0]} {player[1]}"
@@ -154,9 +145,11 @@ class UI:
             print(f"{name:30} {position:3} {team:3} BPM={bpm:5.2f} ({season})")
 
 
+
     def show_operation_menu(self):
         print(f"\n\t  Menu of Operations\n\t{'_' * 22}")
         print(f"\t1. Show Top 10 Players\n\t2. Show Top 10 BPM Players\n\t3. Show Top Scoring Players\n\t4. Exit Program")
+
 
 
 

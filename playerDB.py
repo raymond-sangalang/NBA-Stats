@@ -49,6 +49,7 @@ class nbaDatabase:
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_season ON Player(season)")
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_team ON Player(team)")
         self.cur.execute("CREATE INDEX IF NOT EXISTS idx_position ON Player(position)")
+        
         self.conn.commit()
 
 
@@ -62,7 +63,8 @@ class nbaDatabase:
 
         self.cur.execute("""
             INSERT INTO Player (first_name, last_name, position, team, bpm, season)
-            VALUES (?, ?, ?, ?, ?, ?) """, (first, last, position, team, bpm, season))
+            VALUES (?, ?, ?, ?, ?, ?) 
+        """, (first, last, position, team, bpm, season))
         self.conn.commit()
 
 
@@ -75,7 +77,13 @@ class nbaDatabase:
     def get_all_players(self):
         
         self.cur.execute("""
-            SELECT first_name, last_name, position, team, bpm, season
+            SELECT 
+                first_name, 
+                last_name, 
+                position, 
+                team, 
+                bpm, 
+                season
             FROM Player
             ORDER BY season DESC, bpm DESC
         """)
@@ -85,7 +93,12 @@ class nbaDatabase:
     def get_players_by_team(self, team):
         
         self.cur.execute("""
-            SELECT first_name, last_name, position, bpm, season
+            SELECT 
+                first_name, 
+                last_name, 
+                position, 
+                bpm, 
+                season
             FROM Player
             WHERE team = ?
             ORDER BY season DESC, bpm DESC
@@ -96,7 +109,12 @@ class nbaDatabase:
     def get_players_by_season(self, season):
         
         self.cur.execute("""
-            SELECT first_name, last_name, position, team, bpm
+            SELECT 
+                first_name, 
+                last_name, 
+                position, 
+                team, 
+                bpm
             FROM Player
             WHERE season = ?
             ORDER BY bpm DESC
@@ -129,9 +147,11 @@ class nbaDatabase:
         """, (season,))
         rows = self.cur.fetchall()
 
+
         pos_vals = defaultdict(list)
         for pos, bpm in rows:
             pos_vals[pos].append(bpm)
+
 
         stats = {}
         for pos, vals in pos_vals.items():
@@ -140,10 +160,16 @@ class nbaDatabase:
             stats[pos] = (mean, std)
 
         self.cur.execute("""
-            SELECT first_name, last_name, position, team, bpm
+            SELECT 
+                first_name, 
+                last_name, 
+                position, 
+                team, 
+                bpm
             FROM Player
             WHERE season = ?
         """, (season,))
+
 
         normalized = []
         for fn, ln, pos, team, bpm in self.cur.fetchall():
@@ -152,6 +178,7 @@ class nbaDatabase:
             normalized.append((fn, ln, pos, team, bpm, round(z, 3)))
 
         return normalized
+
 
 
     # Return the average BPM for a given team
@@ -164,7 +191,6 @@ class nbaDatabase:
         """, (team,))
 
         result = self.cur.fetchone()[0]
-
         return result if result else 0.0
 
 
@@ -177,7 +203,8 @@ class nbaDatabase:
 
         self.cur.execute("""
             INSERT INTO Game (game_date, season, home_team, away_team, home_score, away_score, home_win)
-            VALUES (?, ?, ?, ?, ?, ?, ?)""", (game_date, season, home_team, away_team, home_score, away_score, home_win)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (game_date, season, home_team, away_team, home_score, away_score, home_win)
         )
         self.conn.commit()
 
@@ -189,6 +216,18 @@ class nbaDatabase:
         self.cur.execute("""
             SELECT COUNT(*) 
             FROM Player 
+            WHERE season = ?
+        """, (season,))
+        return self.cur.fetchone()[0] > 0
+
+
+
+    # Check whether player data exists for a given season
+    def season_games_exists(self, season):
+
+        self.cur.execute("""
+            SELECT COUNT(*) 
+            FROM Game 
             WHERE season = ?
         """, (season,))
         return self.cur.fetchone()[0] > 0
